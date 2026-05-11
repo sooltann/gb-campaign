@@ -1,1 +1,26 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Core Theme Colors */
+body {
+  background-color: #0A2F1D; /* Deep Pakistan Green */
+  color: #F8FAFC; /* Crisp White */
+}
+
+/* BBC Urdu Typography Standard */
+.font-urdu {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  line-height: 2.8; 
+  word-spacing: 2px;
+}
+
+.text-gold {
+  color: #C5A25D; /* Champagne Gold */
+}
+
+.bg-gold {
+  background-color: #C5A25D;
+}
