@@ -9,23 +9,43 @@ import '../styles/global.css';
     <title>میجر فہد حنیف خان | آفیشل کیمپین</title>
   </head>
   <body class="bg-[#0A2F1D] text-white">
-    
-    <nav class="border-b border-[#C5A25D]/30 bg-[#062013] px-6 py-4 sticky top-0 z-50">
+
+    <nav class="border-b border-[#C5A25D]/30 bg-[#062013] px-6 py-4 sticky top-0 z-50 relative">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
+
         <div class="text-[#C5A25D] font-bold text-2xl md:text-3xl font-urdu">
           میجر فہد حنیف خان
         </div>
-        
+
         <div class="hidden lg:flex space-x-8 space-x-reverse font-urdu text-lg">
           <a href="/" class="text-[#C5A25D] border-b-2 border-[#C5A25D] pb-1">مرکزی صفحہ</a>
-          <a href="/meet-fahad" class="hover:text-[#C5A25D] transition">تعارف</a>
-          <a href="/blueprint" class="hover:text-[#C5A25D] transition">منشور</a>
-          <a href="/youth" class="hover:text-[#C5A25D] transition">نوجوانان</a>
-          <a href="/media" class="hover:text-[#C5A25D] transition">میڈیا سینٹر</a>
+          <a href="/meet-fahad" class="hover:text-[#C5A25D] transition text-gray-300">تعارف</a>
+          <a href="/blueprint" class="hover:text-[#C5A25D] transition text-gray-300">منشور</a>
+          <a href="/youth" class="hover:text-[#C5A25D] transition text-gray-300">نوجوانان</a>
+          <a href="/media" class="hover:text-[#C5A25D] transition text-gray-300">میڈیا سینٹر</a>
         </div>
 
-        <div>
+        <div class="hidden lg:block">
           <a href="/donate" class="bg-[#C5A25D] text-[#0A2F1D] px-6 py-2 rounded-md font-bold font-urdu text-lg hover:bg-white transition shadow-[0_0_15px_rgba(197,162,93,0.4)]">
+            حصہ ڈالیں
+          </a>
+        </div>
+
+        <button id="mobileMenuBtn" class="lg:hidden text-[#C5A25D] focus:outline-none hover:text-white transition">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#062013] border-b border-[#C5A25D]/30 shadow-2xl font-urdu text-center py-6 space-y-6 z-40">
+        <a href="/" class="block text-[#C5A25D] text-xl hover:text-white transition">مرکزی صفحہ</a>
+        <a href="/meet-fahad" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">تعارف</a>
+        <a href="/blueprint" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">منشور</a>
+        <a href="/youth" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">نوجوانان</a>
+        <a href="/media" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">میڈیا سینٹر</a>
+        <div class="pt-4">
+          <a href="/donate" class="inline-block bg-[#C5A25D] text-[#0A2F1D] px-10 py-3 rounded-md font-bold text-xl hover:bg-white transition shadow-lg">
             حصہ ڈالیں
           </a>
         </div>
@@ -43,53 +63,109 @@ import '../styles/global.css';
         </p>
       </div>
     </header>
-<section class="max-w-4xl mx-auto px-6 py-20 border-t border-[#C5A25D]/20 mt-20">
-      <div class="bg-[#062013] border-2 border-[#C5A25D]/30 p-8 md:p-12 rounded-2xl shadow-2xl">
+
+    <section class="max-w-7xl mx-auto px-6 py-20 mt-10 flex justify-start" dir="rtl">
+      
+      <div class="w-full max-w-2xl bg-[#062013] border-2 border-[#C5A25D]/30 p-10 md:p-14 rounded-2xl shadow-2xl text-right">
         
-        <div class="text-center mb-10">
-          <span class="text-4xl">🤝</span>
-          <h2 class="text-3xl md:text-4xl text-[#C5A25D] font-urdu font-bold mt-4 mb-4">آپ ہم سے کیوں ناراض ہیں؟</h2>
-          <p class="text-lg font-urdu leading-loose text-gray-300 max-w-2xl mx-auto">
-            ہم استور کے ہر شہری کے تحفظات کو دور کرنے کے لیے پرعزم ہیں۔ اگر ہماری کسی پالیسی، فیصلے یا رویے سے آپ کو مایوسی ہوئی ہے، تو براہ کرم نیچے دیے گئے فارم کے ذریعے ہمیں آگاہ کریں۔ آپ کا پیغام براہ راست قیادت تک پہنچایا جائے گا اور اسے مکمل صیغہ راز میں رکھا جائے گا۔
+        <div class="mb-10">
+          <span class="text-5xl block mb-4">🤝</span>
+          <h2 class="text-3xl md:text-4xl text-[#C5A25D] font-urdu font-bold mb-4 leading-normal">مشورے اور شکایات</h2>
+          <p class="text-lg font-urdu text-gray-300 leading-[2.5] tracking-wide">
+            ہم آپ کی مخلصانہ رائے کو اہمیت دیتے ہیں۔ آپ کا کوئی مشورہ ہو یا شکایت، براہ کرم ہمیں آگاہ کریں۔ آپ کا پیغام براہ راست قیادت تک پہنچے گا اور اسے مکمل صیغہ راز میں رکھا جائے گا۔
           </p>
         </div>
 
-        <form class="space-y-6 font-urdu text-right" dir="rtl">
+        <form id="grievanceForm" class="space-y-8 font-urdu">
+          
           <div>
-            <label class="block text-[#C5A25D] text-lg mb-2 font-bold">آپ کا نام (اختیاری):</label>
-            <input type="text" placeholder="نام لکھیے..." class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#C5A25D] transition" />
+            <label class="block text-[#C5A25D] text-xl font-bold mb-3 tracking-wide">آپ کا نام (اختیاری):</label>
+            <input id="gName" type="text" placeholder="اپنا نام درج کریں" class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-5 py-4 text-white text-lg focus:outline-none focus:border-[#C5A25D] transition leading-loose" />
           </div>
 
           <div>
-            <label class="block text-[#C5A25D] text-lg mb-2 font-bold">رابطہ نمبر (تاکہ ہم آپ سے رابطہ کر سکیں):</label>
-            <input type="tel" required placeholder="مثال: 03001234567" class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#C5A25D] transition text-left" dir="ltr" />
+            <label class="block text-[#C5A25D] text-xl font-bold mb-3 tracking-wide">رابطہ نمبر:</label>
+            <input id="gPhone" type="tel" required placeholder="03001234567" class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-5 py-4 text-white text-lg focus:outline-none focus:border-[#C5A25D] transition text-left tracking-widest" dir="ltr" />
           </div>
 
           <div>
-            <label class="block text-[#C5A25D] text-lg mb-2 font-bold">آپ کا علاقہ / یونین کونسل:</label>
-            <select class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#C5A25D] transition">
-              <option>انتخاب کریں...</option>
-              <option>استور خاص</option>
-              <option>شنکر گڑھ</option>
-              <option>گوری کوٹ</option>
-              <option>منی مرگ</option>
-              <option>دیگر علاقہ</option>
+            <label class="block text-[#C5A25D] text-xl font-bold mb-3 tracking-wide">آپ کا علاقہ / حلقہ:</label>
+            <select id="gHalqa" class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-5 py-4 text-white text-lg focus:outline-none focus:border-[#C5A25D] transition leading-loose">
+              <option value="Not Selected">انتخاب کریں...</option>
+              <option value="Astore Khas">استور خاص</option>
+              <option value="Shankar Garh">شنکر گڑھ</option>
+              <option value="Gori Kot">گوری کوٹ</option>
+              <option value="Mini Marg">منی مرگ</option>
+              <option value="Other">دیگر علاقہ</option>
             </select>
           </div>
 
           <div>
-            <label class="block text-[#C5A25D] text-lg mb-2 font-bold">اپنی شکایت یا تجویز تفصیل سے لکھیے:</label>
-            <textarea rows="5" required placeholder="اپنے تحفظات یہاں تحریر کریں..." class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#C5A25D] transition"></textarea>
+            <label class="block text-[#C5A25D] text-xl font-bold mb-3 tracking-wide">اپنا پیغام درج کریں:</label>
+            <textarea id="gMessage" rows="6" required placeholder="اپنی تجاویز یا شکایات تفصیل سے تحریر کریں..." class="w-full bg-[#0A2F1D] border border-[#C5A25D]/30 rounded-lg px-5 py-4 text-white text-lg focus:outline-none focus:border-[#C5A25D] transition leading-[2.5] tracking-wide resize-none"></textarea>
           </div>
 
-          <div class="text-center pt-4">
-            <button type="submit" class="bg-[#C5A25D] text-[#0A2F1D] px-10 py-3 rounded-lg font-bold text-xl hover:bg-white transition shadow-lg w-full md:w-auto">
-              شکایت درج کروائیں
+          <div class="pt-6">
+            <button id="submitBtn" type="submit" class="bg-[#C5A25D] text-[#0A2F1D] px-14 py-4 rounded-lg font-bold text-2xl hover:bg-white transition shadow-lg w-full md:w-auto tracking-wide leading-relaxed">
+              جمع کروائیں
             </button>
           </div>
+
         </form>
 
       </div>
     </section>
+
+    <script>
+      import { supabase } from '../lib/supabase.js';
+
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      const form = document.getElementById('grievanceForm');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault(); 
+          
+          const originalBtnText = submitBtn.innerText;
+          submitBtn.innerText = "براہ کرم انتظار کریں...";
+          submitBtn.disabled = true;
+
+          const voter_name = document.getElementById('gName').value;
+          const phone = document.getElementById('gPhone').value;
+          const halqa = document.getElementById('gHalqa').value;
+          const message = document.getElementById('gMessage').value;
+
+          const { data, error } = await supabase
+            .from('grievances')
+            .insert([
+              { voter_name, phone, halqa, message }
+            ]);
+
+          if (error) {
+            alert("کوئی مسئلہ پیش آیا ہے۔ براہ کرم دوبارہ کوشش کریں۔");
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+          } else {
+            form.innerHTML = `
+              <div class="text-center py-16">
+                <span class="text-6xl mb-6 block">✅</span>
+                <h3 class="text-3xl text-[#C5A25D] font-urdu font-bold mb-4 leading-normal">شکریہ!</h3>
+                <p class="text-white text-xl font-urdu leading-[2.5] tracking-wide">آپ کا پیغام کامیابی سے موصول ہو گیا ہے اور قیادت کو ارسال کر دیا گیا ہے۔</p>
+              </div>
+            `;
+          }
+        });
+      }
+    </script>
+
   </body>
 </html>
