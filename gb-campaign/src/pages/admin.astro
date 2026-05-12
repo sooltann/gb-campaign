@@ -95,10 +95,8 @@ import '../styles/global.css';
     </div>
 
     <div id="dashboardScreen" class="hidden h-screen w-full relative overflow-hidden flex">
-      
-      <div id="sidebarOverlay" class="absolute inset-0 bg-black/80 z-40 hidden md:hidden"></div>
 
-      <aside id="adminSidebar" class="absolute md:relative z-50 h-screen w-80 max-w-[80vw] bg-[#01411C] flex flex-col shrink-0 shadow-[20px_0_45px_rgba(0,0,0,0.9)] border-r border-[#BA8E23]/20 transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+      <aside id="adminSidebar" class="w-full md:w-80 h-screen bg-[#01411C] flex flex-col shrink-0 shadow-[20px_0_45px_rgba(0,0,0,0.9)] border-r border-[#BA8E23]/20 z-50">
         <div class="p-6 md:p-8 border-b border-[#BA8E23]/20 text-center flex flex-col items-center bg-black/20">
           <h2 class="font-heading text-xl tracking-tighter text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase">
             <span class="block text-xs text-[#BA8E23] tracking-[0.3em] mb-1">Fahad Hanif Campaign</span>
@@ -108,8 +106,13 @@ import '../styles/global.css';
         
         <nav class="flex-1 px-4 py-6 space-y-4 overflow-y-auto"></nav>
         
-        <div class="p-6 border-t border-[#BA8E23]/20 bg-black/10">
-          <button id="logoutBtn" class="w-full text-center text-xs font-black uppercase tracking-widest text-[#BA8E23] hover:text-white transition-colors bg-[#01411C] py-4 rounded-xl border-2 border-black shadow-[0_5px_15px_rgba(0,0,0,0.8)]">Abort Session / لاگ آؤٹ</button>
+        <div class="p-6 border-t border-[#BA8E23]/20 bg-black/10 flex flex-col gap-3">
+          <a href="/" class="w-full block text-center text-xs font-black uppercase tracking-widest text-[#01411C] bg-[#BA8E23] hover:bg-white hover:text-[#01411C] transition-colors py-4 rounded-xl border-2 border-black shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
+            Home / مرکزی صفحہ
+          </a>
+          <button id="logoutBtn" class="w-full text-center text-xs font-black uppercase tracking-widest text-[#BA8E23] hover:text-white transition-colors bg-[#01411C] py-4 rounded-xl border-2 border-black shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
+            Exit War Room
+          </button>
         </div>
       </aside>
 
@@ -122,16 +125,17 @@ import '../styles/global.css';
         </div>
       </div>
 
-      <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] relative min-w-0">
+      <main id="mainContent" class="hidden md:flex flex-col flex-1 h-screen overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] relative min-w-0">
         <div class="absolute inset-0 bg-gradient-to-br from-[#001A0B]/95 to-[#01411C]/90 z-0"></div>
 
-        <div class="md:hidden flex items-center justify-between px-4 py-3 bg-[#001A0B] border-b border-[#BA8E23]/20 z-30 relative shadow-md">
-          <h2 class="font-heading text-lg font-black text-white uppercase tracking-tighter"><span class="text-[#BA8E23]">War</span> Room</h2>
-          <button id="mobileMenuBtn" class="text-[#BA8E23] hover:text-white focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        <div class="md:hidden flex items-center px-4 py-3 bg-[#001A0B] border-b border-[#BA8E23]/20 z-30 relative shadow-md">
+          <button id="backToMenuBtn" class="flex items-center text-[#BA8E23] hover:text-white font-bold text-[10px] uppercase tracking-widest focus:outline-none bg-black/40 px-3 py-2 rounded-lg border border-[#BA8E23]/50 transition-colors">
+            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
+            Back
           </button>
+          <div class="flex-1 text-center font-heading text-lg font-black text-white uppercase tracking-tighter pr-16"><span class="text-[#BA8E23]">War</span> Room</div>
         </div>
 
         <div class="news-ticker w-full flex items-center z-20 relative shadow-lg">
@@ -284,18 +288,24 @@ import '../styles/global.css';
       const dashboardScreen = document.getElementById('dashboardScreen');
       const loginScreen = document.getElementById('loginScreen');
       
-      // Mobile Menu Handling
+      // Elements for Mobile UX Handling
       const sidebar = document.getElementById('adminSidebar');
-      const overlay = document.getElementById('sidebarOverlay');
-      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mainContent = document.getElementById('mainContent');
+      const backToMenuBtn = document.getElementById('backToMenuBtn');
 
-      function toggleSidebar() {
-        sidebar.classList.toggle('-translate-x-full');
-        overlay.classList.toggle('hidden');
-      }
+      // Back Button Logic: Hide content, show sidebar
+      backToMenuBtn.onclick = () => {
+        sidebar.style.display = 'flex';
+        mainContent.style.display = 'none';
+      };
 
-      mobileMenuBtn.onclick = toggleSidebar;
-      overlay.onclick = toggleSidebar;
+      // Reset styles if device is rotated to landscape (Desktop mode)
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          sidebar.style.display = '';
+          mainContent.style.display = '';
+        }
+      });
       
       const views = {
         'navInbox': { title: 'Public Messages', subEn: 'Live Constituent Feed', subUr: 'عوامی پیغامات کا مرکز', el: document.getElementById('viewInbox'), addBtn: null },
@@ -314,7 +324,7 @@ import '../styles/global.css';
         btn.id = id;
         btn.className = "hq-nav-btn w-full text-left px-4 md:px-5 py-4 bg-[#BA8E23] text-[#01411C] font-black rounded-xl text-xs uppercase tracking-widest transition-all duration-300 ease-out origin-right flex justify-between items-center shadow-[0_5px_15px_rgba(0,0,0,0.8)] border-2 border-black opacity-90 mb-3";
         btn.innerHTML = `<span>${views[id].title}</span><span class="font-urdu text-[#BA8E23] text-[10px] tracking-normal drop-shadow-md hidden md:inline-block">${views[id].subUr}</span>`;
-        btn.onclick = () => switchView(id);
+        btn.onclick = () => switchView(id, false); // false means user triggered it
         navMenu.appendChild(btn);
       });
 
@@ -325,7 +335,7 @@ import '../styles/global.css';
         if (icon) icon.innerText = el.classList.contains('hidden') ? '+' : '−';
       };
 
-      function switchView(activeNavId) {
+      function switchView(activeNavId, isInitialLoad = false) {
         document.querySelectorAll('.hq-nav-btn').forEach(btn => {
           btn.className = 'hq-nav-btn w-full text-left px-4 md:px-5 py-4 bg-[#BA8E23] text-[#01411C] font-black rounded-xl text-xs uppercase tracking-widest transition-all duration-300 ease-out origin-right flex justify-between items-center shadow-[0_5px_15px_rgba(0,0,0,0.8)] border-2 border-black opacity-90 mb-3';
         });
@@ -353,9 +363,10 @@ import '../styles/global.css';
           actionBox.appendChild(btn);
         }
 
-        // Auto-close sidebar on mobile after making a selection
-        if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
-            toggleSidebar(); 
+        // Mobile specific: If user clicks a menu item, hide sidebar and show main content
+        if (window.innerWidth < 768 && !isInitialLoad) {
+            sidebar.style.display = 'none';
+            mainContent.style.display = 'flex';
         }
       }
 
@@ -451,7 +462,14 @@ import '../styles/global.css';
         if (!error) { 
           loginScreen.classList.add('hidden'); 
           dashboardScreen.classList.remove('hidden'); 
-          switchView('navInbox');
+          
+          switchView('navInbox', true); // Load data but indicate initial load
+          
+          // Mobile specific: Ensure user sees the menu list upon logging in, not the data screen
+          if (window.innerWidth < 768) {
+            sidebar.style.display = 'flex';
+            mainContent.style.display = 'none';
+          }
         } else { 
           alert("Unauthorized Command Key"); 
         }
