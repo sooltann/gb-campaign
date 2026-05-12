@@ -7,7 +7,7 @@ import '../styles/global.css';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Campaign HQs | Major (R) Fahad Hanif Khan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
     <style>
       :root {
         --campaign-green: #01411C;
@@ -23,6 +23,7 @@ import '../styles/global.css';
         background-color: var(--hq-dark); 
         color: white;
         margin: 0;
+        overflow-x: hidden;
       }
       .font-heading { font-family: 'Syne', sans-serif; }
       .font-urdu { font-family: 'Noto Nastaliq Urdu', serif; }
@@ -66,6 +67,18 @@ import '../styles/global.css';
       .hq-card-header:hover { background: #01411C; }
       .hq-card-body { padding: 20px; border-top: 1px solid rgba(186, 142, 35, 0.2); overflow-x: auto; }
       .status-tag { font-size: 10px; font-weight: 900; color: var(--hq-gold); border: 1px solid var(--hq-gold); padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+
+      /* MOBILE SCREEN RIGHT-TO-LEFT SLIDE TRANSITION */
+      @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      
+      @media (max-width: 767px) {
+        .mobile-slide-active {
+          animation: slideInRight 0.25s cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
+        }
+      }
     </style>
   </head>
   <body class="antialiased break-words">
@@ -145,138 +158,227 @@ import '../styles/global.css';
           <marquee scrollamount="5" class="font-bold text-xs md:text-sm tracking-wide py-2.5 text-[#BA8E23]" id="globalTicker">Recount requested in Dashkin... New IT Lab commissioned in Gorikot Valleys... 400+ new voters registered in Bunji.</marquee>
         </div>
 
-        <header class="px-4 md:px-10 py-6 md:py-8 shrink-0 relative z-10 border-b border-[#BA8E23]/20">
-          <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-            <div class="flex-1 border-l-4 border-[#BA8E23] pl-4 md:pl-6 w-full">
-              <h2 id="viewTitle" class="font-heading text-3xl md:text-5xl font-black text-white uppercase tracking-tighter drop-shadow-lg leading-none mb-2"></h2>
-              <div class="flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-2 pr-4">
-                <p id="viewSubtitleEn" class="text-[#BA8E23] font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] bg-[#001A0B] px-3 py-1 rounded border border-[#BA8E23]/30"></p>
-                <p id="viewSubtitleUr" class="text-[#BA8E23] font-urdu text-xs md:text-sm tracking-wide text-right w-full md:w-auto mt-2 md:mt-0" dir="rtl"></p>
-              </div>
-            </div>
-            <div id="actionBtnContainer" class="shrink-0 flex items-center w-full md:w-auto justify-end mt-4 md:mt-0"></div>
-          </div>
-        </header>
-
-        <div class="flex-1 px-4 md:px-10 pb-10 pt-6 overflow-y-auto relative z-10">
-          
-          <div id="viewInbox" class="view-panel space-y-6"><div id="inboxContainer" class="flex flex-col gap-4 pb-10"></div></div>
-          
-          <div id="viewConfirmed" class="view-panel hidden space-y-6">
-            <div id="formConfirmed" class="hidden bg-[#01411C] p-4 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
-              <form id="addConfirmedForm" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <select id="cType" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white focus:outline-none w-full">
-                    <option value="Individual">Individual (فرد)</option>
-                    <option value="Family">Family (خاندان)</option>
-                    <option value="Village">Village (گاؤں)</option>
-                  </select>
-                  <input type="text" id="cName" required placeholder="Entity Name" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2 w-full">
-                  <input type="number" id="cCount" required placeholder="Voters" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                </div>
-                <div class="flex justify-end mt-4"><button type="submit" class="btn-3d w-full md:w-auto px-8 py-3 rounded-xl uppercase text-xs">Save Record</button></div>
-              </form>
-            </div>
-            <div id="voterTableBody" class="flex flex-col gap-4 pb-10"></div>
-          </div>
-          
-          <div id="viewSwing" class="view-panel hidden space-y-6">
-            <div id="formSwing" class="hidden bg-[#01411C] p-4 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
-              <form id="addSwingForm" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" id="svName" required placeholder="Target Name" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="svArea" required placeholder="Area/Village" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="svProb" required placeholder="Probability (High/Med)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="svDemand" required placeholder="Core Demand" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="svLeverage" required placeholder="Leverage Point" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="svHandler" required placeholder="Assigned Handler" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <textarea id="svAssistance" required placeholder="Required Assistance" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2 w-full"></textarea>
-                </div>
-                <div class="flex justify-end mt-4"><button type="submit" class="btn-3d w-full md:w-auto px-8 py-3 rounded-xl uppercase text-xs">Save Target</button></div>
-              </form>
-            </div>
-            <div id="swingContainer" class="flex flex-col gap-4"></div>
-          </div>
-
-          <div id="viewInternal" class="view-panel hidden space-y-6">
-            <div id="formInternal" class="hidden bg-[#01411C] p-4 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
-              <form id="addInternalForm" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" id="soTitle" required placeholder="Directive Title" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="soImpact" required placeholder="Expected Impact" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <textarea id="soBody" required placeholder="Directive Body" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2 w-full"></textarea>
-                </div>
-                <div class="flex justify-end mt-4"><button type="submit" class="btn-3d w-full md:w-auto px-8 py-3 rounded-xl uppercase text-xs">Deploy Directive</button></div>
-              </form>
-            </div>
-            <div id="internalContainer" class="flex flex-col gap-4"></div>
-          </div>
-
-          <div id="viewOpp" class="view-panel hidden space-y-6">
-            <div id="formOpp" class="hidden bg-[#01411C] p-4 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
-              <form id="addOppForm" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" id="opCandidate" required placeholder="Opponent Name" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="opVuln" required placeholder="Vulnerability Identified" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <textarea id="opIntel" required placeholder="Intelligence Details" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full"></textarea>
-                  <textarea id="opWeapon" required placeholder="Weaponization Strategy" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full"></textarea>
-                  <input type="text" id="opFile" placeholder="File Reference (Optional)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2 w-full">
-                </div>
-                <div class="flex justify-end mt-4"><button type="submit" class="btn-3d w-full md:w-auto px-8 py-3 rounded-xl uppercase text-xs">Log Intel</button></div>
-              </form>
-            </div>
-            <div id="oppContainer" class="flex flex-col gap-4"></div>
-          </div>
-
-          <div id="viewNews" class="view-panel hidden space-y-8">
-            <div id="formNews" class="hidden bg-[#01411C] p-4 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
-              <form id="addNewsForm" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" id="nwHeadline" required placeholder="Headline" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <select id="nwStatus" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white focus:outline-none w-full">
-                    <option value="Pending Approval">Pending Approval</option>
-                    <option value="Approved">Approved</option>
-                  </select>
-                  <textarea id="nwBody" required placeholder="Broadcast Body" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2 w-full"></textarea>
-                </div>
-                <div class="flex justify-end mt-4"><button type="submit" class="btn-3d w-full md:w-auto px-8 py-3 rounded-xl uppercase text-xs">Queue Broadcast</button></div>
-              </form>
-            </div>
-            <div id="liveNewsFeed" class="flex flex-col gap-4"></div>
-          </div>
-
-          <div id="viewGoals" class="view-panel hidden space-y-6">
-            <div id="formGoals" class="hidden bg-[#01411C] p-4 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
-              <form id="addGoalsForm" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <input type="text" id="glTitle" required placeholder="Goal Title" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="text" id="glType" required placeholder="Type (e.g., Door-to-Door)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <div class="grid grid-cols-2 gap-2 w-full">
-                    <input type="number" id="glTarget" required placeholder="Target #" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                    <input type="number" id="glCurrent" required placeholder="Current #" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
+        <div class="flex-1 overflow-y-auto relative z-10 w-full px-4 md:px-10 pb-10 pt-6">
+          <div class="max-w-5xl mx-auto w-full">
+            
+            <header class="mb-8 border-b border-[#BA8E23]/20 pb-6">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                <div class="flex-1 border-l-4 border-[#BA8E23] pl-4 md:pl-6 w-full">
+                  <h2 id="viewTitle" class="font-heading text-2xl md:text-4xl font-black text-white uppercase tracking-tighter drop-shadow-lg leading-none mb-2"></h2>
+                  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full gap-2 mt-2">
+                    <p id="viewSubtitleEn" class="text-[#BA8E23] font-bold text-[9px] md:text-[10px] uppercase tracking-[0.2em] bg-[#001A0B] px-3 py-1 rounded border border-[#BA8E23]/30"></p>
+                    <p id="viewSubtitleUr" class="text-[#BA8E23] font-urdu text-xs md:text-sm tracking-wide text-right w-full sm:w-auto mt-1 sm:mt-0" dir="rtl"></p>
                   </div>
-                  <textarea id="glStrategy" required placeholder="Execution Strategy" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-3 w-full"></textarea>
                 </div>
-                <div class="flex justify-end mt-4"><button type="submit" class="btn-3d w-full md:w-auto px-8 py-3 rounded-xl uppercase text-xs">Set Goal</button></div>
-              </form>
-            </div>
-            <div id="goalsContainer" class="flex flex-col gap-4"></div>
-          </div>
+                <div id="actionBtnContainer" class="shrink-0 w-full sm:w-auto flex justify-end"></div>
+              </div>
+            </header>
 
-          <div id="viewPostal" class="view-panel hidden space-y-6">
-            <div id="formPostal" class="hidden bg-[#01411C] p-4 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
-              <form id="addPostalForm" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" id="psEntity" required placeholder="Department/Entity" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <input type="number" id="psCount" required placeholder="Ballot Count" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full">
-                  <textarea id="psNotes" placeholder="Notes (Optional)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2 w-full"></textarea>
-                </div>
-                <div class="flex justify-end mt-4"><button type="submit" class="btn-3d w-full md:w-auto px-8 py-3 rounded-xl uppercase text-xs">Log Ballots</button></div>
-              </form>
+            <div id="viewInbox" class="view-panel space-y-6"><div id="inboxContainer" class="flex flex-col gap-4 pb-10"></div></div>
+            
+            <div id="viewConfirmed" class="view-panel hidden space-y-6">
+              <div id="formConfirmed" class="hidden bg-[#01411C]/80 backdrop-blur-md p-5 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+                <form id="addConfirmedForm" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Entity Unit Group</label>
+                      <select id="cType" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white focus:outline-none w-full text-sm">
+                        <option value="Individual">Individual (فرد)</option>
+                        <option value="Family">Family (خاندان)</option>
+                        <option value="Village">Village (گاؤں)</option>
+                      </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Entity Reference Name</label>
+                      <input type="text" id="cName"安全 required placeholder="EXAMPLE TO USE: Rattoo Valley Bloc Main Council" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Voter Strength Count</label>
+                      <input type="number" id="cCount" required placeholder="EXAMPLE TO USE: 1250" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                  </div>
+                  <div class="flex justify-end pt-2"><button type="submit" class="btn-3d w-full sm:w-auto px-8 py-3 rounded-xl uppercase text-xs border border-black shadow-md">Save Block Record</button></div>
+                </form>
+              </div>
+              <div id="voterTableBody" class="flex flex-col gap-4 pb-10"></div>
             </div>
-            <div id="postalContainer" class="flex flex-col gap-4"></div>
-          </div>
+            
+            <div id="viewSwing" class="view-panel hidden space-y-6">
+              <div id="formSwing" class="hidden bg-[#01411C]/80 backdrop-blur-md p-5 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+                <form id="addSwingForm" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Target Name / Tribe Leader</label>
+                      <input type="text" id="svName" required placeholder="EXAMPLE TO USE: Bunji Youth Alliance Council Committee" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Specific Geographic Sector Area</label>
+                      <input type="text" id="svArea" required placeholder="EXAMPLE TO USE: Bunji Bazaar / Main Post Station" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Flip Probability Mismatch Level</label>
+                      <input type="text" id="svProjected" id="svProb" required placeholder="EXAMPLE TO USE: Medium (Leaning to flip with support)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Core Demand Request Matrix</label>
+                      <input type="text" id="svDemand" required placeholder="EXAMPLE TO USE: Upgrade Local Telecomm Mobile Tower Node" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Strategic Campaign Leverage Point</label>
+                      <input type="text" id="svLeverage" required placeholder="EXAMPLE TO USE: Link with Digital IT Lab Initiative Roadmap" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Assigned Ground Handler Strategist</label>
+                      <input type="text" id="svHandler" required placeholder="EXAMPLE TO USE: Captain Tariq Mahmood" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Detailed Required Technical/Logistical Assistance</label>
+                      <textarea id="svAssistance" required placeholder="EXAMPLE TO USE: Allocate provincial development support framework budget for immediate local 4G signal expansion tracking." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none h-24 resize-none"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex justify-end pt-2"><button type="submit" class="btn-3d w-full sm:w-auto px-8 py-3 rounded-xl uppercase text-xs border border-black shadow-md">Save Swing Target Node</button></div>
+                </form>
+              </div>
+              <div id="swingContainer" class="flex flex-col gap-4"></div>
+            </div>
 
+            <div id="viewInternal" class="view-panel hidden space-y-6">
+              <div id="formInternal" class="hidden bg-[#01411C]/80 backdrop-blur-md p-5 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+                <form id="addInternalForm" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Operational Directive Title</label>
+                      <input type="text" id="soTitle" required placeholder="EXAMPLE TO USE: Operation Grassroots Voter Registration Unit" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Expected Electoral Metric Impact</label>
+                      <input type="text" id="soImpact" required placeholder="EXAMPLE TO USE: Critical High Level (Accelerate rural data counts)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Directive Mandate Execution Blueprint Text</label>
+                      <textarea id="soBody" required placeholder="EXAMPLE TO USE: Deploy mobile verification teams into remote sectors. Ensure full tracking of women voter card application forms before regional administrative cut-offs." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none h-28 resize-none"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex justify-end pt-2"><button type="submit" class="btn-3d w-full sm:w-auto px-8 py-3 rounded-xl uppercase text-xs border border-black shadow-md">Deploy Operation Command</button></div>
+                </form>
+              </div>
+              <div id="internalContainer" class="flex flex-col gap-4"></div>
+            </div>
+
+            <div id="viewOpp" class="view-panel hidden space-y-6">
+              <div id="formOpp" class="hidden bg-[#01411C]/80 backdrop-blur-md p-5 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+                <form id="addOppForm" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Target Opposition Candidate Name</label>
+                      <input type="text" id="opCandidate" required placeholder="EXAMPLE TO USE: Independent Candidate Sector Bloc Alpha" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Vulnerability Core Vector Identified</label>
+                      <input type="text" id="opVuln" required placeholder="EXAMPLE TO USE: Massive Delays in Past 2023 Clean Irrigation Schemes" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Intelligence Assessment Background Details</label>
+                      <textarea id="opIntel" required placeholder="EXAMPLE TO USE: Local public dissatisfaction is growing in Dashkin village regarding incomplete execution of clean water infrastructure channels." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none h-24 resize-none"></textarea>
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Counter-Narrative Weaponization Strategy</label>
+                      <textarea id="opWeapon" required placeholder="EXAMPLE TO USE: Contrast their delayed timeline metrics directly against Major Fahad's rapid infrastructure completion execution blueprint during upcoming village rallies." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none h-24 resize-none"></textarea>
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Internal Reference Audit File Attachment String (Optional)</label>
+                      <input type="text" id="opFile" placeholder="EXAMPLE TO USE: GBA13-AUDIT-2023-WATER.pdf" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                  </div>
+                  <div class="flex justify-end pt-2"><button type="submit" class="btn-3d w-full sm:w-auto px-8 py-3 rounded-xl uppercase text-xs border border-black shadow-md">Log Classified Intelligence</button></div>
+                </form>
+              </div>
+              <div id="oppContainer" class="flex flex-col gap-4"></div>
+            </div>
+
+            <div id="viewNews" class="view-panel hidden space-y-8">
+              <div id="formNews" class="hidden bg-[#01411C]/80 backdrop-blur-md p-5 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+                <form id="addNewsForm" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Media Broadcast News Headline</label>
+                      <input type="text" id="nwHeadline" required placeholder="EXAMPLE TO USE: Major Fahad Proposes Cutting-Edge Regional IT Revolution Blueprint" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Queue Stream Verification Status</label>
+                      <select id="nwStatus" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white focus:outline-none w-full text-sm">
+                        <option value="Pending Approval">Pending Approval</option>
+                        <option value="Approved">Approved</option>
+                      </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Full Broadcast Press Content Body</label>
+                      <textarea id="nwBody" required placeholder="EXAMPLE TO USE: Announcing a fully funded specialized digital skills framework program across Gorikot to empower local youth with advanced remote economy access tools." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none h-28 resize-none"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex justify-end pt-2"><button type="submit" class="btn-3d w-full sm:w-auto px-8 py-3 rounded-xl uppercase text-xs border border-black shadow-md">Queue Digital Broadcast</button></div>
+                </form>
+              </div>
+              <div id="liveNewsFeed" class="flex flex-col gap-4"></div>
+            </div>
+
+            <div id="viewGoals" class="view-panel hidden space-y-6">
+              <div id="formGoals" class="hidden bg-[#01411C]/80 backdrop-blur-md p-5 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+                <form id="addGoalsForm" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Milestone Mission Title</label>
+                      <input type="text" id="glTitle" required placeholder="EXAMPLE TO USE: Target Secure 15,000 Verified Voter Registrations" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Operational Initiative Type</label>
+                      <input type="text" id="glType" required placeholder="EXAMPLE TO USE: Door-to-Door Voter Drives" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                      <div>
+                        <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Target End Goal #</label>
+                        <input type="number" id="glTarget" required placeholder="15000" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                      </div>
+                      <div>
+                        <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Current Active Log #</label>
+                        <input type="number" id="glCurrent" required placeholder="9350" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                      </div>
+                    </div>
+                    <div class="sm:col-span-3">
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Execution Action Strategy</label>
+                      <textarea id="glStrategy" required placeholder="EXAMPLE TO USE: Deploy highly coordinated field outreach vehicles into rural mountainous hamlets using regional maps to safely guide volunteer teams to isolated homes." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none h-24 resize-none"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex justify-end pt-2"><button type="submit" class="btn-3d w-full sm:w-auto px-8 py-3 rounded-xl uppercase text-xs border border-black shadow-md">Lock Active Objective</button></div>
+                </form>
+              </div>
+              <div id="goalsContainer" class="flex flex-col gap-4"></div>
+            </div>
+
+            <div id="viewPostal" class="view-panel hidden space-y-6">
+              <div id="formPostal" class="hidden bg-[#01411C]/80 backdrop-blur-md p-5 md:p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+                <form id="addPostalForm" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Target Public Department / Bureaucracy Entity</label>
+                      <input type="text" id="psEntity" required placeholder="EXAMPLE TO USE: Gilgit-Baltistan Education & Health Cadre Officers" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Total Ballot Forms Dispatched Count</label>
+                      <input type="number" id="psCount" required placeholder="EXAMPLE TO USE: 145" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none">
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold text-[#BA8E23] uppercase tracking-wider block mb-1">Operational Tracking Log Notes</label>
+                      <textarea id="psNotes" placeholder="EXAMPLE TO USE: Verified and cleanly recorded via official departmental focal persons. Logged and safely packed for secure dispatch to main station." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white w-full text-sm placeholder-white/20 focus:border-[#BA8E23] outline-none h-24 resize-none"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex justify-end pt-2"><button type="submit" class="btn-3d w-full sm:w-auto px-8 py-3 rounded-xl uppercase text-xs border border-black shadow-md">Log Official Ballots</button></div>
+                </form>
+              </div>
+              <div id="postalContainer" class="flex flex-col gap-4"></div>
+            </div>
+
+          </div>
         </div>
       </main>
     </div>
@@ -288,22 +390,22 @@ import '../styles/global.css';
       const dashboardScreen = document.getElementById('dashboardScreen');
       const loginScreen = document.getElementById('loginScreen');
       
-      // Elements for Mobile UX Handling
       const sidebar = document.getElementById('adminSidebar');
       const mainContent = document.getElementById('mainContent');
       const backToMenuBtn = document.getElementById('backToMenuBtn');
 
-      // Back Button Logic: Hide content, show sidebar
+      // Native Back Navigation
       backToMenuBtn.onclick = () => {
         sidebar.style.display = 'flex';
         mainContent.style.display = 'none';
+        mainContent.classList.remove('mobile-slide-active');
       };
 
-      // Reset styles if device is rotated to landscape (Desktop mode)
       window.addEventListener('resize', () => {
         if (window.innerWidth >= 768) {
           sidebar.style.display = '';
           mainContent.style.display = '';
+          mainContent.classList.remove('mobile-slide-active');
         }
       });
       
@@ -324,7 +426,7 @@ import '../styles/global.css';
         btn.id = id;
         btn.className = "hq-nav-btn w-full text-left px-4 md:px-5 py-4 bg-[#BA8E23] text-[#01411C] font-black rounded-xl text-xs uppercase tracking-widest transition-all duration-300 ease-out origin-right flex justify-between items-center shadow-[0_5px_15px_rgba(0,0,0,0.8)] border-2 border-black opacity-90 mb-3";
         btn.innerHTML = `<span>${views[id].title}</span><span class="font-urdu text-[#BA8E23] text-[10px] tracking-normal drop-shadow-md hidden md:inline-block">${views[id].subUr}</span>`;
-        btn.onclick = () => switchView(id, false); // false means user triggered it
+        btn.onclick = () => switchView(id, false);
         navMenu.appendChild(btn);
       });
 
@@ -354,7 +456,7 @@ import '../styles/global.css';
         actionBox.innerHTML = '';
         if (s.addBtn) {
           const btn = document.createElement('button');
-          btn.className = "btn-3d w-full md:w-auto px-8 py-3.5 rounded-xl uppercase text-xs border-2 border-black";
+          btn.className = "btn-3d w-full sm:w-auto px-8 py-3.5 rounded-xl uppercase text-xs border-2 border-black";
           btn.innerText = s.addBtn;
           btn.onclick = () => {
             const form = s.el.querySelector('[id^="form"]');
@@ -363,14 +465,15 @@ import '../styles/global.css';
           actionBox.appendChild(btn);
         }
 
-        // Mobile specific: If user clicks a menu item, hide sidebar and show main content
+        // Trigger WhatsApp style Right-to-Left Slide Animation on Mobile Viewports
         if (window.innerWidth < 768 && !isInitialLoad) {
             sidebar.style.display = 'none';
             mainContent.style.display = 'flex';
+            mainContent.classList.add('mobile-slide-active');
         }
       }
 
-      // Supabase Insertion Logic
+      // Database Insertion Listeners
       const formConfirmed = document.getElementById('addConfirmedForm');
       if(formConfirmed) {
         formConfirmed.onsubmit = async (e) => {
@@ -434,16 +537,16 @@ import '../styles/global.css';
         };
       }
 
-      // DUMMY DATA
+      // DISPLAY FEED SECTORS DUMMY PACKS
       const dummyData = {
-        inbox: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('msg1')"><h4 class="truncate max-w-[200px] md:max-w-full">Gorikot Healthcare Petition</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">URGENT</span><span id="icon_msg1" class="text-white font-bold">+</span></div></div><div id="msg1" class="hq-card-body hidden font-urdu text-right" dir="rtl">گوریکوٹ میں ادویات کی شدید کمی ہے، براہ کرم اس پر توجہ دیں۔</div></div>`,
-        confirmed: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('cv1')"><h4>Rattoo Valley Bloc</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">1,250 Voters</span><span id="icon_cv1" class="text-white font-bold">+</span></div></div><div id="cv1" class="hq-card-body hidden"><p class="text-sm text-white/80">Solid support from the local union. Key contact: Haji Mustafa.</p></div></div>`,
-        swing: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('sv1')"><h4>Bunji Youth Council</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">LEVERAGE: IT LAB</span><span id="icon_sv1" class="text-white font-bold">+</span></div></div><div id="sv1" class="hq-card-body hidden"><p class="text-sm text-white/80">Currently leaning towards opposition due to connectivity issues. Promising a fiber-optic node can flip 400 votes.</p></div></div>`,
-        internal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('ip1')"><h4>Operation Door-to-Door</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-red-500 border-red-500">IMPACT: HIGH</span><span id="icon_ip1" class="text-white font-bold">+</span></div></div><div id="ip1" class="hq-card-body hidden"><p class="text-sm text-white/80">Targeting 50 households per day in Dashkin sector. Handlers must emphasize digital job creation.</p></div></div>`,
-        opp: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('intel1')"><h4 class="truncate max-w-[150px] md:max-w-full">Opponent A - Vulnerability</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">WEAPON: CONTRACTS</span><span id="icon_intel1" class="text-white font-bold">+</span></div></div><div id="intel1" class="hq-card-body hidden"><p class="text-sm text-white/80">Found discrepancies in public road contracts for 2023. Ready for release in Week 4.</p></div></div>`,
-        news: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('news1')"><h4 class="truncate max-w-[150px] md:max-w-full">Major Fahad Promises IT Rev</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-green-400 border-green-400">APPROVED</span><span id="icon_news1" class="text-white font-bold">+</span></div></div><div id="news1" class="hq-card-body hidden"><p class="text-sm text-white/80">Scheduled for broadcast on local GB networks tonight at 8:00 PM.</p></div></div>`,
-        goals: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('goal1')"><h4 class="truncate max-w-[150px] md:max-w-full">Goal: 15,000 Verified Voters</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-blue-400 border-blue-400">62% DONE</span><span id="icon_goal1" class="text-white font-bold">+</span></div></div><div id="goal1" class="hq-card-body hidden"><p class="text-sm text-white/80">Target: 15k | Current: 9.3k. Strategy: Intensive focus on female voter registration in rural zones.</p></div></div>`,
-        postal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('post1')"><h4>GB Education Dept</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">85 Ballots</span><span id="icon_post1" class="text-white font-bold">+</span></div></div><div id="post1" class="hq-card-body hidden"><p class="text-sm text-white/80">Secured through departmental focal person. Verified and logged for station dispatch.</p></div></div>`
+        inbox: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('msg1')"><h4 class="truncate max-w-[200px] md:max-w-full font-semibold">Gorikot Healthcare Petition</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">URGENT</span><span id="icon_msg1" class="text-white font-bold">+</span></div></div><div id="msg1" class="hq-card-body hidden font-urdu text-right text-base leading-loose" dir="rtl">گوریکوٹ میں ادویات کی شدید کمی ہے، براہ کرم اس پر توجہ دیں۔</div></div>`,
+        confirmed: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('cv1')"><h4 class="font-semibold">Rattoo Valley Bloc</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">1,250 Voters</span><span id="icon_cv1" class="text-white font-bold">+</span></div></div><div id="cv1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Solid support from the local union. Key contact: Haji Mustafa.</p></div></div>`,
+        swing: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('sv1')"><h4 class="font-semibold">Bunji Youth Council</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">LEVERAGE: IT LAB</span><span id="icon_sv1" class="text-white font-bold">+</span></div></div><div id="sv1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Currently leaning towards opposition due to connectivity issues. Promising a fiber-optic node can flip 400 votes.</p></div></div>`,
+        internal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('ip1')"><h4 class="font-semibold">Operation Door-to-Door</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-red-500 border-red-500">IMPACT: HIGH</span><span id="icon_ip1" class="text-white font-bold">+</span></div></div><div id="ip1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Targeting 50 households per day in Dashkin sector. Handlers must emphasize digital job creation.</p></div></div>`,
+        opp: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('intel1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold">Opponent A - Vulnerability</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">WEAPON: CONTRACTS</span><span id="icon_intel1" class="text-white font-bold">+</span></div></div><div id="intel1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Found discrepancies in public road contracts for 2023. Ready for release in Week 4.</p></div></div>`,
+        news: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('news1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold">Major Fahad Promises IT Rev</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-green-400 border-green-400">APPROVED</span><span id="icon_news1" class="text-white font-bold">+</span></div></div><div id="news1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Scheduled for broadcast on local GB networks tonight at 8:00 PM.</p></div></div>`,
+        goals: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('goal1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold">Goal: 15,000 Verified Voters</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-blue-400 border-blue-400">62% DONE</span><span id="icon_goal1" class="text-white font-bold">+</span></div></div><div id="goal1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Target: 15k | Current: 9.3k. Strategy: Intensive focus on female voter registration in rural zones.</p></div></div>`,
+        postal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('post1')"><h4 class="font-semibold">GB Education Dept</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">85 Ballots</span><span id="icon_post1" class="text-white font-bold">+</span></div></div><div id="post1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Secured through departmental focal person. Verified and logged for station dispatch.</p></div></div>`
       };
 
       document.getElementById('inboxContainer').innerHTML = dummyData.inbox;
@@ -463,9 +566,8 @@ import '../styles/global.css';
           loginScreen.classList.add('hidden'); 
           dashboardScreen.classList.remove('hidden'); 
           
-          switchView('navInbox', true); // Load data but indicate initial load
+          switchView('navInbox', true);
           
-          // Mobile specific: Ensure user sees the menu list upon logging in, not the data screen
           if (window.innerWidth < 768) {
             sidebar.style.display = 'flex';
             mainContent.style.display = 'none';
