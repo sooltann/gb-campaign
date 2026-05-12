@@ -414,39 +414,55 @@ import '../styles/global.css';
         }
       });
       
-      // Multi-Sentence Gold Urdu Explanations for Premium Clarity
+      // Multi-Sentence Gold Urdu Explanations Linked Directly to Page Context Loops
       const views = {
         'navInbox': { 
           title: 'Public Messages', 
-          subUr: 'عوامی پیغامات اور شکایات کا جائزہ لیں۔ یہاں سے حلقے کے ووٹرز کے حقیقی مسائل کو سمجھ کر انتخابی حکمتِ عملی تیار کی جاتی ہے اور عوامی رابطہ مہم کو منظم کیا جاتا ہے۔' 
+          subUr: 'عوامی پیغامات اور شکایات کا جائزہ لیں۔ یہاں سے حلقے کے ووٹرز کے حقیقی مسائل کو سمجھ کر انتخابی حکمتِ عملی تیار کی جاتی ہے اور عوامی رابطہ مہم کو منظم کیا جاتا ہے۔',
+          el: document.getElementById('viewInbox'),
+          addBtn: null
         },
         'navConfirmed': { 
           title: 'Confirmed Voters', 
-          subUr: 'حتمی ووٹرز اور خاندانوں کا مکمل ریکارڈ یہاں درج کریں۔ اس ڈیٹا بیس کی مدد سے ہر پولنگ اسٹیشن پر اپنی انتخابی گرفت کو مضبوط اور مربوط بنائیں۔' 
+          subUr: 'حتمی ووٹرز اور خاندانوں کا مکمل ریکارڈ یہاں درج کریں۔ اس ڈیٹا بیس کی مدد سے ہر پولنگ اسٹیشن پر اپنی انتخابی گرفت کو مضبوط اور مربوط بنائیں۔',
+          el: document.getElementById('viewConfirmed'),
+          addBtn: '+ Add Entity'
         },
         'navSwing': { 
           title: 'Swing Voters', 
-          subUr: 'غیر فیصلہ کن ووٹرز اور ان کے مطالبات کا انتظام کریں۔ ان ووٹرز کی مخصوص ضروریات کو پورا کر کے مہم کا رخ کامیابی کی طرف موڑنے کے لیے کام کریں۔' 
+          subUr: 'غیر فیصلہ کن ووٹرز اور ان کے مطالبات کا انتظام کریں۔ ان ووٹرز کی مخصوص ضروریات کو پورا کر کے مہم کا رخ کامیابی کی طرف موڑنے کے لیے کام کریں۔',
+          el: document.getElementById('viewSwing'),
+          addBtn: '+ Add Target'
         },
         'navInternal': { 
           title: 'Focal Points', 
-          subUr: 'انتخابی مہم کے مینیجرز اور فیلڈ فوکل پرسنز کے لیے اہم ترین اندرونی ہدایات جاری کریں۔ یہاں سے ٹیموں کی کارکردگی اور ڈیوٹیز کی نگرانی کی جاتی ہے۔' 
+          subUr: 'انتخابی مہم کے مینیجرز اور فیلڈ فوکل پرسنز کے لیے اہم ترین اندرونی ہدایات جاری کریں۔ یہاں سے ٹیموں کی کارکردگی اور ڈیوٹیز کی نگرانی کی جاتی ہے۔',
+          el: document.getElementById('viewInternal'),
+          addBtn: '+ Add Point'
         },
         'navOpp': { 
           title: 'Opp-Research', 
-          subUr: 'مخالف امیدواروں کی مہم، بیانات اور خامیوں پر گہری نظر رکھیں۔ جوابی بیانات اور انتخابی جلسوں میں جوابی حکمتِ عملی کے لیے اہم ترین معلومات یہاں محفوظ کریں۔' 
+          subUr: 'مخالف امیدواروں کی مہم، بیانات اور خامیوں پر گہری نظر رکھیں۔ جوابی بیانات اور انتخابی جلسوں میں جوابی حکمتِ عملی کے لیے اہم ترین معلومات یہاں محفوظ کریں۔',
+          el: document.getElementById('viewOpp'),
+          addBtn: '+ Add Intel'
         },
         'navNews': { 
           title: 'Important News', 
-          subUr: 'میڈیا اور پبلک پورٹل کے لیے مہم کی تازہ ترین خبریں اور بیانات منظور کریں۔ یہاں سے جاری کی جانے والی ہر خبر براہِ راست مرکزی ویب سائٹ پر اپڈیٹ ہوگی۔' 
+          subUr: 'میڈیا اور پبلک پورٹل کے لیے مہم کی تازہ ترین خبریں اور بیانات منظور کریں۔ یہاں سے جاری کی جانے والی ہر خبر براہِ راست مرکزی ویب سائٹ پر اپڈیٹ ہوگی۔',
+          el: document.getElementById('viewNews'),
+          addBtn: '+ Add News'
         },
         'navGoals': { 
           title: 'Campaign Goals', 
-          subUr: 'انتخابی مہم کے بڑے اہداف اور ہدف شدہ ووٹرز کی تعداد کا موازنہ کریں۔ روزانہ کی بنیاد پر فیلڈ ڈیٹا کا جائزہ لے کر مہم کی رفتار کو تیز کریں۔' 
+          subUr: 'انتخابی مہم کے بڑے اہداف اور ہدف شدہ ووٹرز کی تعداد کا موازنہ کریں۔ روزانہ کی بنیاد پر فیلڈ ڈیٹا کا جائزہ لے کر مہم کی رفتار کو تیز کریں۔',
+          el: document.getElementById('viewGoals'),
+          addBtn: '+ Add Goal'
         },
         'navPostal': { 
           title: 'Postal Ballots', 
-          subUr: 'سرکاری ملازمین اور محکموں کے پوسٹل بیلٹ کا درست ریکارڈ رکھیں۔ ہر ایک بیلٹ پیپر کی ترسیل اور گنتی کو شفاف بنانے کے لیے یہ سیکشن استعمال کریں۔' 
+          subUr: 'سرکاری ملازمین اور محکموں کے پوسٹل بیلٹ کا درست ریکارڈ رکھیں۔ ہر ایک بیلٹ پیپر کی ترسیل اور گنتی کو شفاف بنانے کے لیے یہ سیکشن استعمال کریں۔',
+          el: document.getElementById('viewPostal'),
+          addBtn: '+ Add Entry'
         }
       };
 
@@ -573,18 +589,6 @@ import '../styles/global.css';
         };
       }
 
-      // DISPLAY DATA CARDS
-      const dummyData = {
-        inbox: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('msg1')"><h4 class="truncate max-w-[200px] md:max-w-full font-semibold text-base">Gorikot Healthcare Petition</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">URGENT</span><span id="icon_msg1" class="text-white font-bold">+</span></div></div><div id="msg1" class="hq-card-body hidden font-urdu text-right text-lg leading-loose" dir="rtl">گوریکوٹ میں ادویات کی شدید کمی ہے، براہ کرم اس پر توجہ دیں۔</div></div>`,
-        confirmed: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('cv1')"><h4 class="font-semibold text-base">Rattoo Valley Bloc</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">1,250 Voters</span><span id="icon_cv1" class="text-white font-bold">+</span></div></div><div id="cv1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Solid support from the local union. Key contact: Haji Mustafa.</p></div></div>`,
-        swing: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('sv1')"><h4 class="font-semibold text-base">Bunji Youth Council</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">LEVERAGE: IT LAB</span><span id="icon_sv1" class="text-white font-bold">+</span></div></div><div id="sv1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Currently leaning towards opposition due to connectivity issues. Promising a fiber-optic node can flip 400 votes.</p></div></div>`,
-        internal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('ip1')"><h4 class="font-semibold text-base">Operation Door-to-Door</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-red-500 border-red-500">IMPACT: HIGH</span><span id="icon_ip1" class="text-white font-bold">+</span></div></div><div id="ip1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Targeting 50 households per day in Dashkin sector. Handlers must emphasize digital job creation.</p></div></div>`,
-        opp: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('intel1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold text-base">Opponent A - Vulnerability</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">WEAPON: CONTRACTS</span><span id="icon_intel1" class="text-white font-bold">+</span></div></div><div id="intel1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Found discrepancies in public road contracts for 2023. Ready for release in Week 4.</p></div></div>`,
-        news: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('news1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold text-base">Major Fahad Promises IT Rev</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-green-400 border-green-400">APPROVED</span><span id="icon_news1" class="text-white font-bold">+</span></div></div><div id="news1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Scheduled for broadcast on local GB networks tonight at 8:00 PM.</p></div></div>`,
-        goals: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('goal1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold text-base">Goal: 15,000 Verified Voters</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-blue-400 border-blue-400">62% DONE</span><span id="icon_goal1" class="text-white font-bold">+</span></div></div><div id="goal1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Target: 15k | Current: 9.3k. Strategy: Intensive focus on female voter registration in rural zones.</p></div></div>`,
-        postal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('post1')"><h4 class="font-semibold text-base">GB Education Dept</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">85 Ballots</span><span id="icon_post1" class="text-white font-bold">+</span></div></div><div id="post1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Secured through departmental focal person. Verified and logged for station dispatch.</p></div></div>`
-      };
-
       document.getElementById('inboxContainer').innerHTML = dummyData.inbox;
       document.getElementById('voterTableBody').innerHTML = dummyData.confirmed;
       document.getElementById('swingContainer').innerHTML = dummyData.swing;
@@ -601,7 +605,6 @@ import '../styles/global.css';
         if (!error) { 
           loginScreen.classList.add('hidden'); 
           dashboardScreen.classList.remove('hidden'); 
-          
           switchView('navInbox', true);
         } else { 
           alert("Unauthorized Command Key"); 
