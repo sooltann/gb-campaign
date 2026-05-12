@@ -1,0 +1,439 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaign HQs | Major (R) Fahad Hanif Khan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --campaign-green: #01411C;
+        --hq-gold: #BA8E23;
+        --hq-dark: #001A0B;
+        --pppp-red: #E3000F;
+        --pppp-black: #000000;
+        --pppp-green: #007A3D;
+        --highlighter-green: #39FF14;
+      }
+      body { 
+        font-family: 'Inter', sans-serif; 
+        background-color: var(--hq-dark); 
+        color: white;
+        margin: 0;
+      }
+      .font-heading { font-family: 'Syne', sans-serif; }
+      .font-urdu { font-family: 'Noto Nastaliq Urdu', serif; }
+      
+      .login-frame {
+        border: 2px solid var(--hq-gold);
+        box-shadow: 0 0 25px rgba(186, 142, 35, 0.3);
+      }
+
+      .btn-3d {
+        background: linear-gradient(to bottom, #D4AF37, #BA8E23);
+        color: #01411C;
+        font-weight: 900;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 5px 0 #7A691A;
+        transition: all 0.1s ease;
+      }
+      .btn-3d:active {
+        transform: translateY(4px);
+        box-shadow: 0 1px 0 #7A691A;
+      }
+
+      .pppp-divider {
+        background: linear-gradient(to bottom, var(--pppp-red) 0%, var(--pppp-black) 50%, var(--pppp-green) 100%);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      }
+
+      .news-ticker {
+        background-color: var(--campaign-green);
+        color: white;
+        border-bottom: 2px solid var(--hq-gold);
+      }
+
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: var(--hq-dark); }
+      ::-webkit-scrollbar-thumb { background: var(--hq-gold); border-radius: 10px; }
+
+      /* DUMMY DATA CARDS STYLING */
+      .hq-card { background: #01411C; border: 1px solid rgba(186, 142, 35, 0.3); border-radius: 12px; overflow: hidden; margin-bottom: 15px; }
+      .hq-card-header { cursor: pointer; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #001A0B; transition: 0.3s; }
+      .hq-card-header:hover { background: #01411C; }
+      .hq-card-body { padding: 20px; border-top: 1px solid rgba(186, 142, 35, 0.2); }
+      .status-tag { font-size: 10px; font-weight: 900; color: var(--hq-gold); border: 1px solid var(--hq-gold); padding: 2px 8px; border-radius: 4px; }
+    </style>
+  </head>
+  <body class="antialiased break-words">
+
+    <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] bg-fixed relative">
+      <div class="absolute inset-0 bg-black/60 z-0"></div>
+      
+      <div class="max-w-xl w-full glossy-card py-12 px-8 rounded-[40px] text-center login-frame relative z-10 mx-auto flex flex-col items-center bg-[#001A0B]">
+        <h1 class="font-heading text-3xl mb-1 uppercase tracking-tighter whitespace-nowrap">
+          <span style="color: var(--hq-gold);">Fahad Hanif Khan</span> 
+          <span class="text-white mx-1">Campaign</span> 
+          <span style="color: var(--hq-gold);">HQs</span>
+        </h1>
+        <p class="text-[10px] font-black text-[#BA8E23] uppercase tracking-[0.4em] mb-10" style="text-shadow: 0 0 15px rgba(186, 142, 35, 0.6);">War Room Access</p>
+        
+        <form id="adminLoginForm" class="w-full space-y-6 flex flex-col items-center">
+          <input type="email" id="adminEmail" required class="w-64 bg-black/60 border border-white/20 rounded-full px-5 py-3 text-white placeholder-white/40 focus:border-[#BA8E23] outline-none transition-all text-center text-xs font-bold tracking-wide" placeholder="Strategist Email">
+          <input type="password" id="adminPassword" required class="w-64 bg-black/60 border border-white/20 rounded-full px-5 py-3 text-white placeholder-white/40 focus:border-[#BA8E23] outline-none transition-all text-center text-xs font-bold tracking-widest" placeholder="Command Key">
+          
+          <div class="w-64 pt-4">
+            <button type="submit" class="w-full btn-3d py-4 rounded-full uppercase tracking-widest text-[11px]">
+              Initiate Authorization
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="dashboardScreen" class="hidden min-h-screen flex w-full">
+      
+      <aside class="w-80 bg-[#01411C] flex flex-col shrink-0 z-50 shadow-[20px_0_45px_rgba(0,0,0,0.9)] border-r border-[#BA8E23]/20">
+        <div class="p-8 border-b border-[#BA8E23]/20 text-center flex flex-col items-center bg-black/20">
+          <h2 class="font-heading text-xl tracking-tighter text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase">
+            <span class="block text-xs text-[#BA8E23] tracking-[0.3em] mb-1">Fahad Hanif Campaign</span>
+            War <span class="text-[#BA8E23]">Room</span>
+          </h2>
+        </div>
+        
+        <nav class="flex-1 px-5 py-6 space-y-4 overflow-y-auto"></nav>
+        
+        <div class="p-6 border-t border-[#BA8E23]/20 bg-black/10">
+          <button id="logoutBtn" class="w-full text-center text-xs font-black uppercase tracking-widest text-[#BA8E23] hover:text-white transition-colors bg-[#01411C] py-4 rounded-xl border-2 border-black shadow-[0_5px_15px_rgba(0,0,0,0.8)]">Abort Session / لاگ آؤٹ</button>
+        </div>
+      </aside>
+
+      <div class="w-10 shrink-0 z-40 relative flex flex-col items-center justify-center bg-[#001A0B]">
+        <div class="absolute inset-y-0 w-3 pppp-divider z-0"></div>
+        <div class="bg-[#001A0B] py-6 z-10 flex flex-col items-center rounded-full border-2 border-[#BA8E23] shadow-[0_0_20px_rgba(186,142,35,0.6)]">
+          <svg class="w-10 h-10 text-[#BA8E23] drop-shadow-[0_0_12px_rgba(186,142,35,1)]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 24l-10-10h6v-14h8v14h6z"/>
+          </svg>
+        </div>
+      </div>
+
+      <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#001A0B]/95 to-[#01411C]/90 z-0"></div>
+
+        <div class="news-ticker w-full flex items-center z-20 relative shadow-lg">
+          <div class="text-white border-r border-[#BA8E23] px-6 py-2.5 font-black uppercase tracking-widest text-[10px] shrink-0 flex items-center">
+            <span class="w-2.5 h-2.5 bg-white rounded-full animate-pulse mr-2"></span> LIVE UPDATES
+          </div>
+          <marquee scrollamount="6" class="font-bold text-sm tracking-wide py-2.5 text-[#BA8E23]" id="globalTicker">Recount requested in Dashkin... New IT Lab commissioned in Gorikot Valleys... 400+ new voters registered in Bunji.</marquee>
+        </div>
+
+        <header class="px-10 py-8 shrink-0 relative z-10 border-b border-[#BA8E23]/20">
+          <div class="flex flex-col md:flex-row justify-between items-end gap-4">
+            <div class="flex-1 border-l-4 border-[#BA8E23] pl-6 w-full">
+              <h2 id="viewTitle" class="font-heading text-4xl md:text-5xl font-black text-white uppercase tracking-tighter drop-shadow-lg"></h2>
+              <div class="mt-3 flex flex-col md:flex-row justify-between items-start md:items-center w-full gap-2 pr-4">
+                <p id="viewSubtitleEn" class="text-[#BA8E23] font-bold text-[11px] uppercase tracking-[0.2em] bg-[#001A0B] px-3 py-1 rounded border border-[#BA8E23]/30"></p>
+                <p id="viewSubtitleUr" class="text-[#BA8E23] font-urdu text-sm tracking-wide text-right w-full md:w-auto" dir="rtl"></p>
+              </div>
+            </div>
+            <div id="actionBtnContainer" class="shrink-0 flex items-center gap-6 w-full md:w-auto justify-end"></div>
+          </div>
+        </header>
+
+        <div class="flex-1 px-10 pb-10 pt-6 overflow-y-auto relative z-10">
+          
+          <div id="viewInbox" class="view-panel space-y-6"><div id="inboxContainer" class="flex flex-col gap-4 pb-10"></div></div>
+          
+          <div id="viewConfirmed" class="view-panel hidden space-y-6">
+            <div id="formConfirmed" class="hidden bg-[#01411C] p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+              <form id="addConfirmedForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <select id="cType" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white focus:outline-none">
+                    <option value="Individual">Individual (فرد)</option>
+                    <option value="Family">Family (خاندان)</option>
+                    <option value="Village">Village (گاؤں)</option>
+                  </select>
+                  <input type="text" id="cName" required placeholder="Entity Name" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-2">
+                  <input type="number" id="cCount" required placeholder="Voters" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                </div>
+                <div class="flex justify-end"><button type="submit" class="btn-3d px-8 py-3 rounded-xl uppercase text-xs">Save Record</button></div>
+              </form>
+            </div>
+            <div id="voterTableBody" class="flex flex-col gap-4 pb-10"></div>
+          </div>
+          
+          <div id="viewSwing" class="view-panel hidden space-y-6">
+            <div id="formSwing" class="hidden bg-[#01411C] p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+              <form id="addSwingForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" id="svName" required placeholder="Target Name" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="svArea" required placeholder="Area/Village" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="svProb" required placeholder="Probability (e.g., High, Medium)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="svDemand" required placeholder="Core Demand" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="svLeverage" required placeholder="Leverage Point" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="svHandler" required placeholder="Assigned Handler" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <textarea id="svAssistance" required placeholder="Required Assistance" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2"></textarea>
+                </div>
+                <div class="flex justify-end"><button type="submit" class="btn-3d px-8 py-3 rounded-xl uppercase text-xs">Save Target</button></div>
+              </form>
+            </div>
+            <div id="swingContainer" class="flex flex-col gap-4"></div>
+          </div>
+
+          <div id="viewInternal" class="view-panel hidden space-y-6">
+            <div id="formInternal" class="hidden bg-[#01411C] p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+              <form id="addInternalForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" id="soTitle" required placeholder="Directive Title" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="soImpact" required placeholder="Expected Impact" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <textarea id="soBody" required placeholder="Directive Body" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2"></textarea>
+                </div>
+                <div class="flex justify-end"><button type="submit" class="btn-3d px-8 py-3 rounded-xl uppercase text-xs">Deploy Directive</button></div>
+              </form>
+            </div>
+            <div id="internalContainer" class="flex flex-col gap-4"></div>
+          </div>
+
+          <div id="viewOpp" class="view-panel hidden space-y-6">
+            <div id="formOpp" class="hidden bg-[#01411C] p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+              <form id="addOppForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" id="opCandidate" required placeholder="Opponent Name" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="opVuln" required placeholder="Vulnerability Identified" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <textarea id="opIntel" required placeholder="Intelligence Details" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white"></textarea>
+                  <textarea id="opWeapon" required placeholder="Weaponization Strategy" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white"></textarea>
+                  <input type="text" id="opFile" placeholder="File Reference (Optional)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2">
+                </div>
+                <div class="flex justify-end"><button type="submit" class="btn-3d px-8 py-3 rounded-xl uppercase text-xs">Log Intel</button></div>
+              </form>
+            </div>
+            <div id="oppContainer" class="flex flex-col gap-4"></div>
+          </div>
+
+          <div id="viewNews" class="view-panel hidden space-y-8">
+            <div id="formNews" class="hidden bg-[#01411C] p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+              <form id="addNewsForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" id="nwHeadline" required placeholder="Headline" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <select id="nwStatus" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white focus:outline-none">
+                    <option value="Pending Approval">Pending Approval</option>
+                    <option value="Approved">Approved</option>
+                  </select>
+                  <textarea id="nwBody" required placeholder="Broadcast Body" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2"></textarea>
+                </div>
+                <div class="flex justify-end"><button type="submit" class="btn-3d px-8 py-3 rounded-xl uppercase text-xs">Queue Broadcast</button></div>
+              </form>
+            </div>
+            <div id="liveNewsFeed" class="flex flex-col gap-4"></div>
+          </div>
+
+          <div id="viewGoals" class="view-panel hidden space-y-6">
+            <div id="formGoals" class="hidden bg-[#01411C] p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+              <form id="addGoalsForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <input type="text" id="glTitle" required placeholder="Goal Title" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="text" id="glType" required placeholder="Type (e.g., Door-to-Door)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <div class="grid grid-cols-2 gap-2">
+                    <input type="number" id="glTarget" required placeholder="Target #" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                    <input type="number" id="glCurrent" required placeholder="Current #" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  </div>
+                  <textarea id="glStrategy" required placeholder="Execution Strategy" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-3"></textarea>
+                </div>
+                <div class="flex justify-end"><button type="submit" class="btn-3d px-8 py-3 rounded-xl uppercase text-xs">Set Goal</button></div>
+              </form>
+            </div>
+            <div id="goalsContainer" class="flex flex-col gap-4"></div>
+          </div>
+
+          <div id="viewPostal" class="view-panel hidden space-y-6">
+            <div id="formPostal" class="hidden bg-[#01411C] p-8 rounded-2xl border border-[#BA8E23] mb-8 shadow-2xl">
+              <form id="addPostalForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" id="psEntity" required placeholder="Department/Entity" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <input type="number" id="psCount" required placeholder="Ballot Count" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white">
+                  <textarea id="psNotes" placeholder="Notes (Optional)" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-4 py-3 text-white col-span-1 md:col-span-2"></textarea>
+                </div>
+                <div class="flex justify-end"><button type="submit" class="btn-3d px-8 py-3 rounded-xl uppercase text-xs">Log Ballots</button></div>
+              </form>
+            </div>
+            <div id="postalContainer" class="flex flex-col gap-4"></div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+    <script>
+      import { supabase } from '../lib/supabase.js';
+      
+      const loginForm = document.getElementById('adminLoginForm');
+      const dashboardScreen = document.getElementById('dashboardScreen');
+      const loginScreen = document.getElementById('loginScreen');
+      
+      const views = {
+        'navInbox': { title: 'Public Messages', subEn: 'Live Constituent Feed', subUr: 'عوامی پیغامات کا مرکز', el: document.getElementById('viewInbox'), addBtn: null },
+        'navConfirmed': { title: 'Confirmed Voters', subEn: 'Verified Campaign Base', subUr: 'حتمی ووٹرز کا ڈیٹا بیس', el: document.getElementById('viewConfirmed'), addBtn: '+ Add Entity' },
+        'navSwing': { title: 'Swing Voters', subEn: 'Leverage & Flip Control', subUr: 'فیصلہ کن ووٹرز کی حکمت عملی', el: document.getElementById('viewSwing'), addBtn: '+ Add Target' },
+        'navInternal': { title: 'Focal Points', subEn: 'Internal Campaign Directives', subUr: 'اندرونی انتخابی حکمت عملی', el: document.getElementById('viewInternal'), addBtn: '+ Add Point' },
+        'navOpp': { title: 'Opp-Research', subEn: 'Classified Intelligence Hub', subUr: 'مخالفین پہ ریسرچ', el: document.getElementById('viewOpp'), addBtn: '+ Add Intel' },
+        'navNews': { title: 'Important News', subEn: 'Broadcast Approval Queue', subUr: 'انتخابی مہم کی تازہ ترین خبریں', el: document.getElementById('viewNews'), addBtn: '+ Add News' },
+        'navGoals': { title: 'Campaign Goals', subEn: 'Milestone Tracking', subUr: 'انتخابی مہم کے حتمی اہداف', el: document.getElementById('viewGoals'), addBtn: '+ Add Goal' },
+        'navPostal': { title: 'Postal Ballots', subEn: 'Government Record', subUr: 'پوسٹل بیلٹ کا ریکارڈ', el: document.getElementById('viewPostal'), addBtn: '+ Add Entry' }
+      };
+
+      const navMenu = document.querySelector('nav');
+      Object.keys(views).forEach(id => {
+        const btn = document.createElement('button');
+        btn.id = id;
+        btn.className = "hq-nav-btn w-full text-left px-5 py-4 bg-[#BA8E23] text-[#01411C] font-black rounded-xl text-xs uppercase tracking-widest transition-all duration-300 ease-out origin-right flex justify-between items-center shadow-[0_5px_15px_rgba(0,0,0,0.8)] border-2 border-black opacity-90 mb-3";
+        btn.innerHTML = `<span>${views[id].title}</span><span class="font-urdu text-[#BA8E23] text-[10px] tracking-normal drop-shadow-md">${views[id].subUr}</span>`;
+        btn.onclick = () => switchView(id);
+        navMenu.appendChild(btn);
+      });
+
+      window.toggleAccordion = (id) => {
+        const el = document.getElementById(id);
+        const icon = document.getElementById('icon_' + id);
+        el.classList.toggle('hidden');
+        if (icon) icon.innerText = el.classList.contains('hidden') ? '+' : '−';
+      };
+
+      function switchView(activeNavId) {
+        document.querySelectorAll('.hq-nav-btn').forEach(btn => {
+          btn.className = 'hq-nav-btn w-full text-left px-5 py-4 bg-[#BA8E23] text-[#01411C] font-black rounded-xl text-xs uppercase tracking-widest transition-all duration-300 ease-out origin-right flex justify-between items-center shadow-[0_5px_15px_rgba(0,0,0,0.8)] border-2 border-black opacity-90 mb-3';
+        });
+        document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+
+        const activeBtn = document.getElementById(activeNavId);
+        activeBtn.className = 'hq-nav-btn w-full text-left px-5 py-6 bg-[#01411C] text-[#BA8E23] rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 ease-out origin-right scale-[1.06] shadow-[0_10px_30px_rgba(0,0,0,0.9)] flex justify-between items-center z-10 -ml-2 border-2 border-black opacity-100 mb-3';
+
+        const s = views[activeNavId];
+        s.el.classList.remove('hidden');
+        document.getElementById('viewTitle').innerText = s.title;
+        document.getElementById('viewSubtitleEn').innerText = s.subEn;
+        document.getElementById('viewSubtitleUr').innerText = s.subUr;
+
+        const actionBox = document.getElementById('actionBtnContainer');
+        actionBox.innerHTML = '';
+        if (s.addBtn) {
+          const btn = document.createElement('button');
+          btn.className = "btn-3d px-8 py-3.5 rounded-xl uppercase text-xs border-2 border-black";
+          btn.innerText = s.addBtn;
+          btn.onclick = () => {
+            const form = s.el.querySelector('[id^="form"]');
+            if (form) form.classList.toggle('hidden');
+          };
+          actionBox.appendChild(btn);
+        }
+      }
+
+      // ----------------------------------------------------
+      // SUPABASE DATA INSERTION LOGIC FOR ALL FORMS
+      // ----------------------------------------------------
+
+      const formConfirmed = document.getElementById('addConfirmedForm');
+      if(formConfirmed) {
+        formConfirmed.onsubmit = async (e) => {
+          e.preventDefault();
+          const { error } = await supabase.from('confirmed_voters').insert([{ type: document.getElementById('cType').value, entity_name: document.getElementById('cName').value, voter_count: document.getElementById('cCount').value }]);
+          if (error) alert("Error: " + error.message); else { alert("Saved!"); formConfirmed.reset(); document.getElementById('formConfirmed').classList.add('hidden'); }
+        };
+      }
+
+      const formSwing = document.getElementById('addSwingForm');
+      if(formSwing) {
+        formSwing.onsubmit = async (e) => {
+          e.preventDefault();
+          const { error } = await supabase.from('swing_voters').insert([{ name: document.getElementById('svName').value, area: document.getElementById('svArea').value, prob: document.getElementById('svProb').value, demand: document.getElementById('svDemand').value, leverage: document.getElementById('svLeverage').value, handler: document.getElementById('svHandler').value, assistance: document.getElementById('svAssistance').value }]);
+          if (error) alert("Error: " + error.message); else { alert("Target Logged!"); formSwing.reset(); document.getElementById('formSwing').classList.add('hidden'); }
+        };
+      }
+
+      const formInternal = document.getElementById('addInternalForm');
+      if(formInternal) {
+        formInternal.onsubmit = async (e) => {
+          e.preventDefault();
+          const { error } = await supabase.from('strategic_ops').insert([{ title: document.getElementById('soTitle').value, impact: document.getElementById('soImpact').value, body: document.getElementById('soBody').value }]);
+          if (error) alert("Error: " + error.message); else { alert("Directive Deployed!"); formInternal.reset(); document.getElementById('formInternal').classList.add('hidden'); }
+        };
+      }
+
+      const formOpp = document.getElementById('addOppForm');
+      if(formOpp) {
+        formOpp.onsubmit = async (e) => {
+          e.preventDefault();
+          const { error } = await supabase.from('opp_research').insert([{ candidate: document.getElementById('opCandidate').value, vulnerability: document.getElementById('opVuln').value, intel: document.getElementById('opIntel').value, weapon: document.getElementById('opWeapon').value, file_name: document.getElementById('opFile').value }]);
+          if (error) alert("Error: " + error.message); else { alert("Intel Secured!"); formOpp.reset(); document.getElementById('formOpp').classList.add('hidden'); }
+        };
+      }
+
+      const formNews = document.getElementById('addNewsForm');
+      if(formNews) {
+        formNews.onsubmit = async (e) => {
+          e.preventDefault();
+          const { error } = await supabase.from('news_broadcasts').insert([{ headline: document.getElementById('nwHeadline').value, status: document.getElementById('nwStatus').value, body: document.getElementById('nwBody').value }]);
+          if (error) alert("Error: " + error.message); else { alert("Broadcast Queued!"); formNews.reset(); document.getElementById('formNews').classList.add('hidden'); }
+        };
+      }
+
+      const formGoals = document.getElementById('addGoalsForm');
+      if(formGoals) {
+        formGoals.onsubmit = async (e) => {
+          e.preventDefault();
+          const { error } = await supabase.from('campaign_goals').insert([{ title: document.getElementById('glTitle').value, type: document.getElementById('glType').value, target: document.getElementById('glTarget').value, current: document.getElementById('glCurrent').value, strategy: document.getElementById('glStrategy').value }]);
+          if (error) alert("Error: " + error.message); else { alert("Goal Tracked!"); formGoals.reset(); document.getElementById('formGoals').classList.add('hidden'); }
+        };
+      }
+
+      const formPostal = document.getElementById('addPostalForm');
+      if(formPostal) {
+        formPostal.onsubmit = async (e) => {
+          e.preventDefault();
+          const { error } = await supabase.from('postal_ballots').insert([{ entity: document.getElementById('psEntity').value, count: document.getElementById('psCount').value, notes: document.getElementById('psNotes').value }]);
+          if (error) alert("Error: " + error.message); else { alert("Ballots Logged!"); formPostal.reset(); document.getElementById('formPostal').classList.add('hidden'); }
+        };
+      }
+
+      // ----------------------------------------------------
+      // DUMMY DATA INJECTION
+      // ----------------------------------------------------
+      const dummyData = {
+        inbox: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('msg1')"><h4>Gorikot Healthcare Petition</h4><div class="flex items-center gap-4"><span class="status-tag">URGENT</span><span id="icon_msg1" class="text-white font-bold">+</span></div></div><div id="msg1" class="hq-card-body hidden font-urdu text-right" dir="rtl">گوریکوٹ میں ادویات کی شدید کمی ہے، براہ کرم اس پر توجہ دیں۔</div></div>`,
+        confirmed: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('cv1')"><h4>Rattoo Valley Bloc</h4><div class="flex items-center gap-4"><span class="status-tag text-white border-white">1,250 Voters</span><span id="icon_cv1" class="text-white font-bold">+</span></div></div><div id="cv1" class="hq-card-body hidden"><p class="text-sm text-white/80">Solid support from the local union. Key contact: Haji Mustafa.</p></div></div>`,
+        swing: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('sv1')"><h4>Bunji Youth Council</h4><div class="flex items-center gap-4"><span class="status-tag">LEVERAGE: IT LAB</span><span id="icon_sv1" class="text-white font-bold">+</span></div></div><div id="sv1" class="hq-card-body hidden"><p class="text-sm text-white/80">Currently leaning towards opposition due to connectivity issues. Promising a fiber-optic node can flip 400 votes.</p></div></div>`,
+        internal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('ip1')"><h4>Operation Door-to-Door</h4><div class="flex items-center gap-4"><span class="status-tag text-red-500 border-red-500">IMPACT: HIGH</span><span id="icon_ip1" class="text-white font-bold">+</span></div></div><div id="ip1" class="hq-card-body hidden"><p class="text-sm text-white/80">Targeting 50 households per day in Dashkin sector. Handlers must emphasize digital job creation.</p></div></div>`,
+        opp: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('intel1')"><h4>Opponent A - Vulnerability</h4><div class="flex items-center gap-4"><span class="status-tag">WEAPON: CONTRACTS</span><span id="icon_intel1" class="text-white font-bold">+</span></div></div><div id="intel1" class="hq-card-body hidden"><p class="text-sm text-white/80">Found discrepancies in public road contracts for 2023. Ready for release in Week 4.</p></div></div>`,
+        news: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('news1')"><h4>Major Fahad Promises IT Revolution</h4><div class="flex items-center gap-4"><span class="status-tag text-green-400 border-green-400">STATUS: APPROVED</span><span id="icon_news1" class="text-white font-bold">+</span></div></div><div id="news1" class="hq-card-body hidden"><p class="text-sm text-white/80">Scheduled for broadcast on local GB networks tonight at 8:00 PM.</p></div></div>`,
+        goals: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('goal1')"><h4>Goal: 15,000 Verified Voters</h4><div class="flex items-center gap-4"><span class="status-tag text-blue-400 border-blue-400">62% COMPLETE</span><span id="icon_goal1" class="text-white font-bold">+</span></div></div><div id="goal1" class="hq-card-body hidden"><p class="text-sm text-white/80">Target: 15k | Current: 9.3k. Strategy: Intensive focus on female voter registration in rural zones.</p></div></div>`,
+        postal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('post1')"><h4>GB Education Dept</h4><div class="flex items-center gap-4"><span class="status-tag text-white border-white">COUNT: 85 Ballots</span><span id="icon_post1" class="text-white font-bold">+</span></div></div><div id="post1" class="hq-card-body hidden"><p class="text-sm text-white/80">Secured through departmental focal person. Verified and logged for station dispatch.</p></div></div>`
+      };
+
+      document.getElementById('inboxContainer').innerHTML = dummyData.inbox;
+      document.getElementById('voterTableBody').innerHTML = dummyData.confirmed;
+      document.getElementById('swingContainer').innerHTML = dummyData.swing;
+      document.getElementById('internalContainer').innerHTML = dummyData.internal;
+      document.getElementById('oppContainer').innerHTML = dummyData.opp;
+      document.getElementById('liveNewsFeed').innerHTML = dummyData.news;
+      document.getElementById('goalsContainer').innerHTML = dummyData.goals;
+      document.getElementById('postalContainer').innerHTML = dummyData.postal;
+
+      // LOGIN EXECUTION
+      loginForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const { error } = await supabase.auth.signInWithPassword({ email: adminEmail.value, password: adminPassword.value });
+        if (!error) { 
+          loginScreen.classList.add('hidden'); 
+          dashboardScreen.classList.remove('hidden'); 
+          switchView('navInbox');
+        } else { 
+          alert("Unauthorized Command Key"); 
+        }
+      };
+      
+      document.getElementById('logoutBtn').onclick = () => location.reload();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,215 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Promises | Astore 1 GBA 13</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syne:wght@800&family=Playfair+Display:ital,wght@0,700;1,600&family=Noto+Nastaliq+Urdu:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --flag-red: #cc0000;
+        --flag-black: #000000;
+        --flag-green: #006600;
+        --d-gold: #BA8E23;
+        --hud-bg: rgba(5, 5, 5, 0.95);
+      }
+      
+      * { box-sizing: border-box; }
+
+      body { 
+        font-family: 'Inter', sans-serif; 
+        background-color: #050505; 
+        color: white; 
+        margin: 0; 
+        padding-top: 100px; 
+        overflow-x: hidden; 
+      }
+
+      /* SYNCED COMMAND HUD */
+      .command-hud {
+        position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+        background: var(--hud-bg); border-bottom: 2px solid var(--d-gold);
+        display: flex; justify-content: flex-start; align-items: center;
+        padding: 0 40px; z-index: 1000; backdrop-filter: blur(10px);
+      }
+      .hud-logo { 
+        font-family: 'Archivo Black', sans-serif; 
+        color: var(--d-gold); 
+        text-decoration: none; 
+        font-size: 18px; 
+        letter-spacing: 2px;
+      }
+      .hud-nav { display: flex; gap: 30px; margin-left: 40px; }
+      .hud-link { 
+        color: rgba(255,255,255,0.6); 
+        text-decoration: none; 
+        font-size: 11px; 
+        font-weight: 900; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+        transition: 0.3s;
+      }
+      .hud-link:hover, .hud-link.active { color: var(--d-gold); }
+
+      /* PAGE CONTAINER */
+      .container { 
+        max-width: 1000px; 
+        margin: 0 auto; 
+        padding: 40px 20px; 
+      }
+
+      /* HEADER SECTION */
+      .page-header {
+        text-align: center;
+        margin-bottom: 80px;
+        border-bottom: 1px solid rgba(186, 142, 35, 0.2);
+        padding-bottom: 40px;
+      }
+      .sub-label {
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 8px; 
+        font-weight: 900; 
+        font-size: 12px;
+        color: var(--flag-red); 
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 15px;
+      }
+      h1 { 
+        font-family: 'Syne', sans-serif; 
+        font-size: clamp(3rem, 6vw, 5rem); 
+        color: var(--d-gold); 
+        text-transform: uppercase; 
+        margin: 0; 
+        line-height: 0.9;
+      }
+
+      /* DIRECTIVES LIST (PROMISES) */
+      .directive-row { 
+        display: flex; 
+        gap: 40px; 
+        padding: 50px 0; 
+        border-bottom: 1px solid rgba(255,255,255,0.05); 
+        align-items: flex-start;
+        transition: background-color 0.3s;
+      }
+      .directive-row:hover {
+        background-color: rgba(255, 255, 255, 0.02);
+      }
+
+      .d-num { 
+        font-family: 'Archivo Black', sans-serif; 
+        font-size: 80px; 
+        color: var(--flag-green); 
+        opacity: 0.3; 
+        flex-shrink: 0; 
+        width: 100px;
+        line-height: 0.8;
+        text-align: right;
+      }
+
+      .d-content { flex: 1; }
+      
+      .d-content h2 { 
+        font-family: 'Syne', sans-serif; 
+        font-size: 28px; 
+        color: var(--d-gold); 
+        text-transform: uppercase; 
+        margin: 0 0 15px 0; 
+      }
+      
+      .d-content p { 
+        font-family: 'Inter', sans-serif;
+        font-size: 17px; 
+        color: #ccc; 
+        line-height: 1.8; 
+        margin: 0;
+      }
+
+      /* FOOTER */
+      .signature-footer {
+        text-align: center; 
+        padding: 60px 20px; 
+        color: rgba(255,255,255,0.2); 
+        font-size: 10px; 
+        text-transform: uppercase; 
+        letter-spacing: 2px;
+        font-family: 'Inter', sans-serif;
+      }
+
+      @media (max-width: 768px) {
+        .directive-row { flex-direction: column; gap: 20px; padding: 40px 20px; }
+        .d-num { text-align: left; font-size: 60px; }
+        .command-hud { padding: 0 20px; }
+        .hud-nav { display: none; /* Consider a hamburger menu for mobile later */ }
+      }
+    </style>
+  </head>
+  <body>
+
+    <header class="command-hud">
+      <a href="/" class="hud-logo">G-B ELECTIONS 2026</a>
+      <nav class="hud-nav">
+        <a href="/" class="hud-link">Home</a>
+        <a href="/profile" class="hud-link">Candidate Profile</a>
+        <a href="/promises" class="hud-link active">Campaign Promises</a>
+        <a href="/jobs" class="hud-link">Jobs Portal</a>
+      </nav>
+    </header>
+
+    <div class="container">
+      
+      <div class="page-header">
+        <span class="sub-label">Strategic Objectives 2026</span>
+        <h1>The Covenant</h1>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #888; max-width: 600px; margin: 30px auto 0;">
+          A binding agreement with the people of Astore 1. These are not political slogans; they are actionable directives with measurable outcomes.
+        </p>
+      </div>
+
+      <div class="directive-row">
+        <div class="d-num">01</div>
+        <div class="d-content">
+          <h2>The Digital Frontier</h2>
+          <p>We will establish state-of-the-art IT and technology training centers across Astore. Our youth will no longer need to migrate to major cities; they will access high-paying, global remote jobs directly from their home districts.</p>
+        </div>
+      </div>
+
+      <div class="directive-row">
+        <div class="d-num">02</div>
+        <div class="d-content">
+          <h2>Certified Employment Pipeline</h2>
+          <p>Through direct regional partnerships with the Google Career Consortium and the Higher Education Department, we will secure 1000+ zero-cost scholarships annually for high-demand technical certifications (AI, Data, Cybersecurity).</p>
+        </div>
+      </div>
+
+      <div class="directive-row">
+        <div class="d-num">03</div>
+        <div class="d-content">
+          <h2>Infrastructural Integrity</h2>
+          <p>Fixing the connectivity blackout. Reliable 4G networks and rapid expansion of fiber-optic infrastructure will be treated not as a luxury, but as a fundamental human right for every citizen of Astore participating in the modern economy.</p>
+        </div>
+      </div>
+
+      <div class="directive-row">
+        <div class="d-num">04</div>
+        <div class="d-content">
+          <h2>Transparent Governance</h2>
+          <p>Implementation of a strict 'Zero Tolerance' policy for bureaucratic delays and corruption. The constituency office will operate as an open-door command center, utilizing digital tracking to ensure all citizen grievances are addressed swiftly.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="signature-footer">
+      &copy; 2026 STRATEGIC COMMAND | AUTHORIZED FOR GBA 13 ASTORE 1 | ORDER & PROGRESS
+    </footer>
+
+  </body>
+</html>

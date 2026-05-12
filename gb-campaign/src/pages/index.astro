@@ -2,170 +2,362 @@
 import '../styles/global.css';
 ---
 
-<html lang="ur" dir="rtl">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>میجر فہد حنیف خان | آفیشل کیمپین</title>
+    
+    <title>Astore 1 GBA 13</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syne:wght@800&family=Playfair+Display:ital,wght@0,700;1,600&family=Noto+Nastaliq+Urdu:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --flag-red: #cc0000;
+        --flag-black: #000000;
+        --flag-green: #006600;
+        --d-gold: #BA8E23;
+      }
+      
+      * { box-sizing: border-box; }
+
+      body { 
+        font-family: 'Inter', sans-serif; 
+        /* Deep PPPP themed gradient background for all pages */
+        background: linear-gradient(135deg, #110000 0%, #050505 50%, #001100 100%);
+        background-attachment: fixed;
+        color: white; 
+        margin: 0; 
+        padding-top: 100px; 
+        overflow-x: hidden; 
+      }
+
+      /* COMMAND HUD WITH EXPANDED BLACK GRADIENT */
+      .command-hud {
+        position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+        background: linear-gradient(to right, 
+          rgba(0, 102, 0, 0.95) 10%, 
+          rgba(0, 0, 0, 0.98) 40%, 
+          rgba(0, 0, 0, 0.98) 60%, 
+          rgba(204, 0, 0, 0.95) 90%
+        );
+        border-bottom: 2px solid var(--d-gold);
+        display: flex; justify-content: flex-start; align-items: center;
+        padding: 0 40px; z-index: 1000; backdrop-filter: blur(10px);
+      }
+      .hud-logo { 
+        font-family: 'Archivo Black', sans-serif; 
+        color: var(--d-gold); 
+        text-decoration: none; 
+        font-size: 18px; 
+        letter-spacing: 2px;
+        text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+      }
+      
+      /* ELEGANT BUTTON NAVIGATION */
+      .hud-nav { display: flex; gap: 15px; margin-left: 40px; }
+      .hud-link { 
+        color: rgba(255,255,255,0.8); 
+        text-decoration: none; 
+        font-size: 10px; 
+        font-weight: 900; 
+        text-transform: uppercase; 
+        letter-spacing: 1.5px; 
+        padding: 10px 22px;
+        border: 1px solid rgba(186, 142, 35, 0.4);
+        border-radius: 30px;
+        background: rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      }
+      .hud-link:hover, .hud-link.active { 
+        color: var(--flag-black); 
+        background: var(--d-gold); 
+        border-color: var(--d-gold);
+        box-shadow: 0 0 15px rgba(186, 142, 35, 0.6);
+      }
+
+      /* GRID SYSTEM */
+      .war-room-container { 
+        width: 100%; 
+        max-width: 1200px; 
+        margin: 0 auto; 
+        padding: 20px; 
+      }
+      .grid-3x3 { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        grid-auto-rows: 450px; 
+        gap: 20px; 
+      }
+
+      @media (max-width: 1024px) { 
+        .grid-3x3 { grid-template-columns: 1fr; grid-auto-rows: auto; } 
+      }
+
+      .box { 
+        border: 1px solid rgba(186, 142, 35, 0.3); 
+        border-radius: 12px; 
+        padding: 30px; 
+        display: flex; 
+        flex-direction: column; 
+        position: relative; 
+        overflow: hidden; 
+      }
+
+      .box-left { background: linear-gradient(to bottom, var(--flag-red), #330000); }
+      .box-center { background: linear-gradient(to bottom, #111, var(--flag-black)); padding-bottom: 100px; }
+      .box-right { background: linear-gradient(to bottom, var(--flag-green), #002200); }
+
+      .label { 
+        font-size: 10px; 
+        font-weight: 900; 
+        text-transform: uppercase; 
+        letter-spacing: 0.3em; 
+        color: var(--d-gold); 
+        margin-bottom: 20px; 
+        border-bottom: 1px solid rgba(255,255,255,0.1); 
+        padding-bottom: 8px; 
+      }
+
+      .id-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+      .portrait-frame { 
+        width: 100px; height: 125px; 
+        border: 2px solid var(--d-gold); 
+        border-radius: 6px; 
+        overflow: hidden; 
+        background: #000; 
+        flex-shrink: 0; 
+      }
+      .portrait-frame img { width: 100%; height: 100%; object-fit: contain; }
+      .name-block h2 { 
+        font-family: 'Syne', sans-serif; 
+        font-size: 22px; 
+        color: var(--d-gold); 
+        text-transform: uppercase; 
+        line-height: 1.1; 
+        font-weight: 900; 
+      }
+
+      /* ABSOLUTE BANNER CONTAINER */
+      .brand-strip-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .pppp-green-banner {
+        width: 100%;
+        background: var(--flag-green);
+        padding: 8px 30px; 
+        border-top: 1px solid rgba(255,255,255,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      
+      .pppp-letters {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 18px;
+        letter-spacing: 2px;
+      }
+      
+      .p-red { color: #ff0000; }
+      .p-black { color: #000000; text-shadow: 0 0 3px rgba(255,255,255,0.4); } 
+      .p-green { color: #00ff00; } 
+      
+      .candidate-text {
+        color: white;
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 18px; 
+        letter-spacing: 2px;
+        margin-left: 10px;
+        text-transform: uppercase;
+      }
+
+      .astore-banner-footer {
+        width: 100%;
+        background-color: var(--flag-red); 
+        color: white; 
+        padding: 15px 0;
+        text-align: center; 
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 20px; 
+        font-weight: 900; 
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .urdu-font { font-family: 'Noto Nastaliq Urdu', serif; }
+      .pillars-ur { 
+        font-family: 'Noto Nastaliq Urdu', serif; 
+        font-weight: 700; 
+        color: var(--d-gold); 
+        font-size: 30px; 
+        margin-top: auto; 
+      }
+
+      .slider-wrapper { position: relative; flex: 1; display: flex; align-items: center; overflow: hidden; }
+      .h-slider { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; width: 100%; scroll-snap-type: x mandatory; }
+      .slide { flex: 0 0 100%; scroll-snap-align: start; border-radius: 8px; overflow: hidden; background: black; }
+      
+      .nav-arrow { 
+        position: absolute; background: var(--d-gold); color: black; 
+        width: 28px; height: 28px; border-radius: 50%; 
+        display: flex; align-items: center; justify-content: center; 
+        font-weight: bold; cursor: pointer; z-index: 10; 
+      }
+      .arrow-prev { left: -5px; } .arrow-next { right: -5px; }
+
+      .btn-gold { 
+        background: var(--d-gold); color: black; font-weight: 900; 
+        padding: 15px; border-radius: 6px; text-align: center; 
+        border: none; cursor: pointer; text-decoration: none; display: block; 
+      }
+
+      .urdu-placeholder::placeholder {
+        font-family: 'Noto Nastaliq Urdu', serif;
+        text-align: right;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
   </head>
-  <body class="bg-[#0A2F1D] text-white">
+  <body>
 
-    <nav class="border-b border-[#C5A25D]/30 bg-[#062013] px-6 py-4 sticky top-0 z-50 relative">
-      <div class="max-w-7xl mx-auto flex justify-between items-center">
-
-        <div class="text-[#C5A25D] font-bold text-2xl md:text-3xl font-urdu">
-          میجر فہد حنیف خان
-        </div>
-
-        <div class="hidden lg:flex space-x-8 space-x-reverse font-urdu text-lg">
-          <a href="/" class="text-[#C5A25D] border-b-2 border-[#C5A25D] pb-1">مرکزی صفحہ</a>
-          <a href="/meet-fahad" class="hover:text-[#C5A25D] transition text-gray-300">تعارف</a>
-          <a href="/blueprint" class="hover:text-[#C5A25D] transition text-gray-300">منشور</a>
-          <a href="/youth" class="hover:text-[#C5A25D] transition text-gray-300">نوجوانان</a>
-          <a href="/media" class="hover:text-[#C5A25D] transition text-gray-300">میڈیا سینٹر</a>
-        </div>
-
-        <div class="hidden lg:block">
-          <a href="/donate" class="bg-[#C5A25D] text-[#0A2F1D] px-6 py-2 rounded-md font-bold font-urdu text-lg hover:bg-white transition shadow-[0_0_15px_rgba(197,162,93,0.4)]">
-            حصہ ڈالیں
-          </a>
-        </div>
-
-        <button id="mobileMenuBtn" class="lg:hidden text-[#C5A25D] focus:outline-none hover:text-white transition">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-
-      <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-[#062013] border-b border-[#C5A25D]/30 shadow-2xl font-urdu text-center py-6 space-y-6 z-40">
-        <a href="/" class="block text-[#C5A25D] text-xl hover:text-white transition">مرکزی صفحہ</a>
-        <a href="/meet-fahad" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">تعارف</a>
-        <a href="/blueprint" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">منشور</a>
-        <a href="/youth" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">نوجوانان</a>
-        <a href="/media" class="block text-gray-300 hover:text-[#C5A25D] text-xl transition">میڈیا سینٹر</a>
-        <div class="pt-4">
-          <a href="/donate" class="inline-block bg-[#C5A25D] text-[#0A2F1D] px-10 py-3 rounded-md font-bold text-xl hover:bg-white transition shadow-lg">
-            حصہ ڈالیں
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    <header class="relative w-full h-[60vh] flex items-center justify-center border-b border-white/10">
-      <div class="absolute inset-0 bg-gradient-to-t from-[#0A2F1D] to-transparent z-10"></div>
-      <div class="z-20 text-center px-4">
-        <h1 class="text-4xl md:text-6xl text-[#C5A25D] font-urdu font-bold mb-4 leading-normal">
-          استور کی ترقی، ہماری ذمہ داری
-        </h1>
-        <p class="text-xl md:text-2xl font-urdu max-w-3xl mx-auto leading-loose text-gray-300">
-          ہم صرف وعدے نہیں کرتے، ہم عملی اقدامات پر یقین رکھتے ہیں۔ آئیں مل کر ایک خوشحال اور بااختیار معاشرے کی بنیاد رکھیں۔
-        </p>
-      </div>
+    <header class="command-hud">
+      <a href="/" class="hud-logo">G-B ELECTIONS 2026</a>
+      <nav class="hud-nav">
+        <a href="/" class="hud-link active">Home</a>
+        <a href="/profile" class="hud-link">Candidate Profile</a>
+        <a href="/promises" class="hud-link">Campaign Promises</a>
+        <a href="/jobs" class="hud-link">Jobs Portal</a>
+      </nav>
     </header>
 
-    <section class="max-w-7xl mx-auto px-6 py-16 mt-10 flex justify-start" dir="rtl">
-      
-      <div class="w-full lg:w-1/2 bg-[#062013] border border-[#C5A25D]/30 p-8 md:p-10 rounded-2xl shadow-2xl text-right relative">
+    <div class="war-room-container">
+      <main class="grid-3x3">
         
-        <div class="mb-8 border-b border-[#C5A25D]/20 pb-4">
-          <span class="text-3xl block mb-2 opacity-80">🤝</span>
-          <h2 class="text-xl md:text-2xl text-[#C5A25D] font-urdu font-bold mb-2 tracking-wide">مشورے / شکایات</h2>
-          <p class="text-xs md:text-sm font-urdu text-gray-400 leading-relaxed">
-            آپ کی رائے ہمارے لیے اہم ہے۔ اپنا پیغام درج کریں، یہ براہ راست قیادت تک پہنچے گا۔
-          </p>
+        <div class="box box-center border-t-8 border-t-[#BA8E23]">
+          <div class="id-header">
+            <div class="portrait-frame">
+              <img src="/major-portrait.jpg" alt="Major (R) Fahad Hanif Khan" />
+            </div>
+            <div class="name-block">
+              <h1 style="font-size: 11px; opacity: 0.6; text-transform: uppercase; margin: 0;">Major (R)</h1>
+              <h2>Fahad Hanif Khan</h2>
+            </div>
+          </div>
+          
+          <div style="margin-top: 15px; border-right: 3px solid var(--d-gold); padding-right: 15px;" dir="rtl">
+            <div style="margin-bottom: 8px;">
+              <span style="font-family: 'Noto Nastaliq Urdu', serif; color: #BA8E23; font-size: 1.4rem; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.9);">
+                نَصْرٌ مِّنَ اللَّهِ وَفَتْحٌ قَرِيبٌ
+              </span>
+            </div>
+            <p class="urdu-font text-right" style="font-size: 17px; line-height: 2.2; margin: 0;">
+              استور کی تعمیر نو اور نوجوانوں کی فلاح ہمارا عزم ہے۔
+            </p>
+          </div>
+
+          <div class="brand-strip-container">
+            <div class="pppp-green-banner">
+              <span class="pppp-letters">
+                <span class="p-red">P</span><span class="p-black">P</span><span class="p-green">P</span><span class="p-red">P</span>
+              </span>
+              <span class="candidate-text">CANDIDATE</span>
+            </div>
+            <div class="astore-banner-footer">GBA 13 ASTORE 1</div>
+          </div>
         </div>
 
-        <form id="grievanceForm" class="space-y-6 font-urdu">
+        <div class="box box-left">
+          <span class="label">G-B Elections 2026</span>
+          <p style="font-family: 'Playfair Display'; font-size: 17px; line-height: 1.7;">
+            Transforming Astore into a digital gateway. Integrity is our foundation, Action is our language, and Results are our only metric.
+          </p>
+          <p style="font-family: 'Syne'; font-weight: 900; color: var(--d-gold); font-size: 24px; margin-top: auto;">INTEGRITY, ACTION, RESULTS</p>
+        </div>
+
+        <div class="box box-right text-right" dir="rtl">
+          <p style="font-family: 'Noto Nastaliq Urdu', serif; color: #BA8E23; font-size: 2.2rem; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">
+            بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+          </p>
           
-          <div>
-            <label class="block text-[#C5A25D] text-xs font-semibold mb-2 opacity-90 tracking-wide">نام (اختیاری):</label>
-            <input id="gName" type="text" placeholder="نام لکھیے..." style="height: 45px;" class="w-full bg-[#04180e] border border-[#C5A25D]/40 rounded-md px-4 font-urdu text-[#C5A25D] text-base focus:outline-none focus:border-[#C5A25D] focus:ring-1 focus:ring-[#C5A25D]/20 transition leading-normal placeholder-gray-600" />
+          <p class="urdu-font" style="font-size: 20px; line-height: 2.3; margin-top: 10px;">
+            تعلیم یافتہ اور بااصول قیادت ہی بدلتی دنیا کے چیلنجز کا مقابلہ کر سکتی ہے۔
+          </p>
+          
+          <p class="pillars-ur">دیانت، عمل، نتائج</p>
+        </div>
+
+        <div class="box box-left">
+          <span class="label">Photo Gallery</span>
+          <div class="slider-wrapper">
+            <div class="nav-arrow arrow-prev" onclick="move('photoSlide', -300)">‹</div>
+            <div id="photoSlide" class="h-slider">
+              <div class="slide"><img src="/rally-1.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
+              <div class="slide"><img src="/rally-2.jpg" style="width:100%; height:100%; object-fit:cover;" /></div>
+            </div>
+            <div class="nav-arrow arrow-next" onclick="move('photoSlide', 300)">›</div>
           </div>
+        </div>
 
-          <div>
-            <label class="block text-[#C5A25D] text-xs font-semibold mb-2 opacity-90 tracking-wide">رابطہ نمبر:</label>
-            <input id="gPhone" type="tel" required style="height: 45px;" class="w-full bg-[#04180e] border border-[#C5A25D]/40 rounded-md px-4 font-urdu text-[#C5A25D] text-base focus:outline-none focus:border-[#C5A25D] focus:ring-1 focus:ring-[#C5A25D]/20 transition text-right tracking-wider" dir="ltr" />
+        <div class="box box-center">
+          <span class="label">Media Appearances</span>
+          <div class="slider-wrapper">
+            <div class="nav-arrow arrow-prev" onclick="move('mediaSlide', -300)">‹</div>
+            <div id="mediaSlide" class="h-slider">
+              <div class="slide aspect-video">
+                <iframe src="https://www.youtube.com/embed/hqCK8szadpw" class="w-full h-full" frameborder="0"></iframe>
+              </div>
+            </div>
+            <div class="nav-arrow arrow-next" onclick="move('mediaSlide', 300)">›</div>
           </div>
+        </div>
 
-          <div>
-            <label class="block text-[#C5A25D] text-xs font-semibold mb-2 opacity-90 tracking-wide">علاقہ / حلقہ:</label>
-            <select id="gHalqa" style="height: 45px;" class="w-full bg-[#04180e] border border-[#C5A25D]/40 rounded-md px-4 font-urdu text-[#C5A25D] text-base focus:outline-none focus:border-[#C5A25D] focus:ring-1 focus:ring-[#C5A25D]/20 transition leading-normal text-right">
-              <option value="Not Selected" class="text-gray-500">انتخاب کریں...</option>
-              <option value="Astore Khas">استور خاص</option>
-              <option value="Shankar Garh">شنکر گڑھ</option>
-              <option value="Gori Kot">گوری کوٹ</option>
-              <option value="Mini Marg">منی مرگ</option>
-              <option value="Other">دیگر علاقہ</option>
-            </select>
+        <div class="box box-right row-span-2">
+          <span class="label">News Updates</span>
+          <div id="newsV" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;"></div>
+        </div>
+
+        <div class="box box-left">
+          <span class="label">Opportunity Desk</span>
+          <h2 style="font-family: 'Syne'; font-size: 28px; font-weight: 900; margin-bottom: 10px;">CERTIFIED JOBS</h2>
+          <a href="/jobs" class="btn-gold">Access Portal</a>
+        </div>
+
+        <div class="box box-center">
+          <span class="label">Constituency Portal</span>
+          <div style="display: flex; flex-direction: column; gap: 10px; height: 100%;">
+            <input type="text" placeholder="Full Name" style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 12px; color: white; width: 100%;">
+            <input type="tel" placeholder="Phone Number" style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 12px; color: white; width: 100%;">
+            <textarea class="urdu-placeholder" placeholder="شکایات، مشورے اور سفارشات...." style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 12px; color: white; width: 100%; flex: 1; text-align: right;" dir="rtl"></textarea>
+            <button class="btn-gold">Submit Dispatch</button>
           </div>
+        </div>
 
-          <div>
-            <label class="block text-[#C5A25D] text-xs font-semibold mb-2 opacity-90 tracking-wide">پیغام:</label>
-            <textarea id="gMessage" rows="7" required placeholder="اپنے مشورے یا شکایات تفصیل سے تحریر کریں..." class="w-full bg-[#04180e] border border-[#C5A25D]/40 rounded-md px-4 py-4 font-urdu text-[#C5A25D] text-base focus:outline-none focus:border-[#C5A25D] focus:ring-1 focus:ring-[#C5A25D]/20 transition resize-none leading-relaxed tracking-wide placeholder-gray-600"></textarea>
-          </div>
-
-          <div class="pt-2">
-            <button id="submitBtn" type="submit" style="height: 48px;" class="bg-[#C5A25D] text-[#0A2F1D] px-8 rounded-md font-bold text-lg hover:bg-white transition shadow-md w-full tracking-wide">
-              جمع کروائیں
-            </button>
-          </div>
-
-        </form>
-
-      </div>
-    </section>
+      </main>
+    </div>
 
     <script>
       import { supabase } from '../lib/supabase.js';
-
-      const mobileBtn = document.getElementById('mobileMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-
-      if (mobileBtn && mobileMenu) {
-        mobileBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-        });
+      window.move = (id, amt) => { document.getElementById(id).scrollBy({ left: amt, behavior: 'smooth' }); };
+      async function init() {
+        const { data } = await supabase.from('news_broadcasts').select('*').eq('status', 'Approved').order('created_at', { ascending: false });
+        if (data) {
+          document.getElementById('newsV').innerHTML = data.map(n => `
+            <div style="border-left: 3px solid var(--d-gold); padding-left: 15px; margin-bottom: 25px;">
+              <p style="font-size: 10px; color: var(--d-gold); margin: 0;">${new Date(n.created_at).toLocaleDateString()}</p>
+              <h4 style="font-size: 14px; font-weight: 900; text-transform: uppercase; margin: 5px 0;">${n.headline}</h4>
+            </div>
+          `).join('');
+        }
       }
-
-      const form = document.getElementById('grievanceForm');
-      const submitBtn = document.getElementById('submitBtn');
-
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault(); 
-          
-          const originalBtnText = submitBtn.innerText;
-          submitBtn.innerText = "براہ کرم انتظار کریں...";
-          submitBtn.disabled = true;
-
-          const voter_name = document.getElementById('gName').value;
-          const phone = document.getElementById('gPhone').value;
-          const halqa = document.getElementById('gHalqa').value;
-          const message = document.getElementById('gMessage').value;
-
-          const { data, error } = await supabase
-            .from('grievances')
-            .insert([
-              { voter_name, phone, halqa, message }
-            ]);
-
-          if (error) {
-            alert("کوئی مسئلہ پیش آیا ہے۔ براہ کرم دوبارہ کوشش کریں۔");
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
-          } else {
-            form.innerHTML = `
-              <div class="text-center py-16">
-                <span class="text-5xl mb-4 block">✅</span>
-                <h3 class="text-2xl text-[#C5A25D] font-urdu font-bold mb-3 leading-normal">شکریہ!</h3>
-                <p class="text-white text-lg font-urdu leading-loose">آپ کا پیغام کامیابی سے موصول ہو گیا ہے اور قیادت کو ارسال کر دیا گیا ہے۔</p>
-              </div>
-            `;
-          }
-        });
-      }
+      init();
     </script>
-
   </body>
 </html>

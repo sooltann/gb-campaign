@@ -1,0 +1,204 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certified Jobs | Astore 1 GBA 13</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syne:wght@800&family=Playfair+Display:ital,wght@0,700;1,700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --flag-red: #cc0000;
+        --flag-black: #000000;
+        --flag-green: #006600;
+        --d-gold: #BA8E23;
+      }
+      
+      * { box-sizing: border-box; }
+
+      body { 
+        font-family: 'Inter', sans-serif; 
+        background-color: #050505; 
+        color: white; 
+        margin: 0; 
+        padding: 100px 0 40px 0; 
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* SYNCHRONIZED HUD WITH PPPP GRADIENT BLEND */
+      .command-hud {
+        position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+        background: linear-gradient(to right, rgba(204, 0, 0, 0.9), rgba(0, 0, 0, 0.95), rgba(0, 102, 0, 0.9), rgba(204, 0, 0, 0.9));
+        border-bottom: 2px solid var(--d-gold);
+        display: flex; justify-content: flex-start; align-items: center;
+        padding: 0 40px; z-index: 1000; backdrop-filter: blur(10px);
+      }
+      .hud-logo { 
+        font-family: 'Archivo Black', sans-serif; 
+        color: var(--d-gold); 
+        text-decoration: none; 
+        font-size: 18px; 
+        letter-spacing: 2px;
+        text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+      }
+      .hud-nav { display: flex; gap: 30px; margin-left: 40px; }
+      .hud-link { 
+        color: rgba(255,255,255,0.7); 
+        text-decoration: none; 
+        font-size: 11px; 
+        font-weight: 900; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+        text-shadow: 0px 1px 3px rgba(0,0,0,0.8);
+      }
+      .hud-link:hover, .hud-link.active { color: var(--d-gold); }
+
+      .war-room-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .grid-3x3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 450px; 
+        gap: 20px;
+        width: 100%;
+      }
+
+      @media (max-width: 1024px) { 
+        .grid-3x3 { grid-template-columns: 1fr; grid-auto-rows: auto; } 
+      }
+
+      .box {
+        border: 1px solid rgba(186, 142, 35, 0.3);
+        border-radius: 12px;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .box-left { background: linear-gradient(to bottom, var(--flag-red), #330000); }
+      .box-center { background: linear-gradient(to bottom, #111, var(--flag-black)); }
+      .box-right { background: linear-gradient(to bottom, var(--flag-green), #002200); }
+
+      .label {
+        font-size: 10px; font-weight: 900; text-transform: uppercase;
+        letter-spacing: 0.2em; color: var(--d-gold); margin-bottom: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;
+      }
+
+      h2 { font-family: 'Syne', sans-serif; font-size: 24px; text-transform: uppercase; color: var(--d-gold); margin: 0 0 10px 0; line-height: 1; }
+      .spec-text { font-family: 'Playfair Display'; font-size: 15px; line-height: 1.5; color: #eee; }
+
+      .btn-gold {
+        background: var(--d-gold); color: black; font-weight: 900;
+        padding: 14px; border-radius: 6px; text-align: center; border: none; cursor: pointer;
+        text-decoration: none; display: block; margin-top: auto; font-size: 10px; text-transform: uppercase;
+      }
+
+      .gba-banner-footer {
+        width: calc(100% + 50px); margin-left: -25px; margin-top: auto;
+        background-color: var(--d-gold); color: black; padding: 15px 0;
+        text-align: center; font-family: 'Archivo Black', sans-serif;
+        font-size: 18px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
+      }
+
+      .footer-signature {
+        text-align: center; padding: 40px; color: rgba(255,255,255,0.2); font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <header class="command-hud">
+      <a href="/" class="hud-logo">G-B ELECTIONS 2026</a>
+      <nav class="hud-nav">
+        <a href="/" class="hud-link">Home</a>
+        <a href="/profile" class="hud-link">Candidate Profile</a>
+        <a href="/promises" class="hud-link">Campaign Promises</a>
+        <a href="/jobs" class="hud-link active">Jobs Portal</a>
+      </nav>
+    </header>
+
+    <div class="war-room-container">
+      <main class="grid-3x3">
+        
+        <div class="box box-left">
+          <span class="label">Specification 01</span>
+          <h2>Cybersecurity</h2>
+          <p class="spec-text">Defend global information networks. SOC Analyst and InfoSec roles for detail-oriented problem solvers.</p>
+          <a href="https://grow.google/certificates/cybersecurity/" class="btn-gold" target="_blank">Begin Track</a>
+        </div>
+
+        <div class="box box-center border-t-8 border-t-[#BA8E23]">
+          <span class="label">Core Priority</span>
+          <h2>AI Professional</h2>
+          <p class="spec-text">Lead the AI economy. Expert track for AI Consultants and Business Automation specialists.</p>
+          <div class="gba-banner-footer">GBA 13 ASTORE 1</div>
+        </div>
+
+        <div class="box box-right">
+          <span class="label">Specification 02</span>
+          <h2>Data Analytics</h2>
+          <p class="spec-text">Transform raw data into strategic intelligence. Master predictive modeling and business insights.</p>
+          <a href="https://grow.google/certificates/data-analytics/" class="btn-gold" target="_blank">Begin Track</a>
+        </div>
+
+        <div class="box box-left">
+          <span class="label">Strategic Ops</span>
+          <h2>Project Management</h2>
+          <p class="spec-text">Operations training for the organizers. Run large-scale projects with absolute military precision.</p>
+          <a href="https://grow.google/certificates/project-management/" class="btn-gold" target="_blank">Begin Track</a>
+        </div>
+
+        <div class="box box-center">
+          <span class="label">Consortium Intelligence</span>
+          <p class="spec-text" style="font-size: 14px;">Direct access to 150+ global employers including Deloitte, Verizon, and Walmart. Results-driven hiring pipeline.</p>
+          <div class="gba-banner-footer">EMPLOYER CONSORTIUM</div>
+        </div>
+
+        <div class="box box-right">
+          <span class="label">Specification 03</span>
+          <h2>UX Design</h2>
+          <p class="spec-text">Empathetic intelligence for digital products. Design the user interfaces of the next decade.</p>
+          <a href="https://grow.google/certificates/ux-design/" class="btn-gold" target="_blank">Begin Track</a>
+        </div>
+
+        <div class="box box-left">
+          <span class="label">Advanced Track</span>
+          <h2>IT Automation</h2>
+          <p class="spec-text">Master Python for DevOps and SysAdmin roles. Automate infrastructure at a global scale.</p>
+          <a href="https://grow.google/certificates/python-automation/" class="btn-gold" target="_blank">Begin Track</a>
+        </div>
+
+        <div class="box box-center">
+          <span class="label">Scholarship Desk</span>
+          <p class="spec-text">GBA-13 residents can access regional scholarships through the HED to complete these tracks at zero cost.</p>
+          <div class="gba-banner-footer">ZERO COST INITIATIVE</div>
+        </div>
+
+        <div class="box box-right">
+          <span class="label">Foundation</span>
+          <h2>IT Support</h2>
+          <p class="spec-text">The entry point for technical mastery. Troubleshooting and foundational systems architecture.</p>
+          <a href="https://grow.google/certificates/it-support/" class="btn-gold" target="_blank">Begin Track</a>
+        </div>
+
+      </main>
+    </div>
+
+    <footer class="footer-signature">
+      &copy; 2026 STRATEGIC COMMAND | AUTHORIZED FOR GBA 13 ASTORE 1 | ORDER & PROGRESS
+    </footer>
+
+  </body>
+</html>
