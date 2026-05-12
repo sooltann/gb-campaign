@@ -62,7 +62,7 @@ import '../styles/global.css';
       .hq-card-body { padding: 24px; border-top: 1px solid rgba(186, 142, 35, 0.2); overflow-x: auto; }
       .status-tag { font-size: 11px; font-weight: 900; color: var(--hq-gold); border: 1px solid var(--hq-gold); padding: 4px 12px; border-radius: 6px; white-space: nowrap; }
 
-      /* CINEMATIC SLO-MO BIDIRECTIONAL LAYERING SYSTEM */
+      /* CINEMATIC SLO-MO MASTER-DETAIL LAYERING SYSTEM */
       #mainContent {
         display: flex;
         flex-direction: column;
@@ -71,24 +71,26 @@ import '../styles/global.css';
         overflow: hidden;
         position: relative;
         min-width: 0;
-        transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       @media (max-width: 767px) {
         #adminSidebar {
           position: absolute;
           top: 0; left: 0;
-          width: 100vw;
+          width: 100vw !important;
           height: 100vh;
+          display: flex !important;
           z-index: 10;
         }
         #mainContent {
           position: fixed !important;
           top: 0; left: 0; right: 0; bottom: 0;
-          z-index: 60;
-          width: 100vw;
-          height: 100vh;
+          z-index: 100 !important;
+          width: 100vw !important;
+          height: 100vh !important;
           transform: translateX(100%);
+          transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          display: flex !important;
         }
         #mainContent.mobile-view-active {
           transform: translateX(0) !important;
@@ -102,9 +104,9 @@ import '../styles/global.css';
       <div class="absolute inset-0 bg-black/60 z-0"></div>
       
       <div class="max-w-xl w-full glossy-card py-12 px-6 md:px-8 rounded-[40px] text-center login-frame relative z-10 mx-auto flex flex-col items-center bg-[#001A0B]">
-        <h1 class="font-heading uppercase tracking-tighter mb-6">
-          <span class="block text-3xl font-black text-[#BA8E23] mb-1">Major (R) Fahad Hanif Khan</span>
-          <span class="block text-base text-white/90 font-bold tracking-widest">Campaign HQs</span>
+        <h1 class="font-heading uppercase tracking-tighter mb-6 text-center">
+          <span class="block text-2xl md:text-3xl font-black text-[#BA8E23] mb-1">Major (R) Fahad Hanif Khan</span>
+          <span class="block text-base md:text-lg text-white font-bold tracking-widest mt-1">Campaign HQs</span>
         </h1>
         <p class="text-[10px] font-black text-[#BA8E23] uppercase tracking-[0.4em] mb-10" style="text-shadow: 0 0 15px rgba(186, 142, 35, 0.6);">War Room Access</p>
         
@@ -173,9 +175,8 @@ import '../styles/global.css';
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
                 <div class="flex-1 border-l-4 border-[#BA8E23] pl-4 md:pl-6 w-full">
                   <h2 id="viewTitle" class="font-heading text-3xl md:text-5xl font-black text-white uppercase tracking-tighter drop-shadow-lg leading-none mb-3"></h2>
-                  <div class="w-full mt-4 space-y-4 bg-black/40 p-6 rounded-2xl border border-white/5">
-                    <p id="viewSubtitleEn" class="text-white/80 font-medium text-sm leading-relaxed max-w-3xl"></p>
-                    <p id="viewSubtitleUr" class="text-[#BA8E23] font-urdu text-base font-bold text-left leading-loose max-w-3xl" dir="rtl"></p>
+                  <div class="w-full mt-4 bg-black/40 p-6 rounded-2xl border border-white/5">
+                    <p id="viewSubtitleUr" class="text-[#BA8E23] font-urdu text-base font-bold text-left leading-loose w-full" dir="rtl"></p>
                   </div>
                 </div>
                 <div id="actionBtnContainer" class="shrink-0 w-full sm:w-auto flex justify-end"></div>
@@ -402,7 +403,7 @@ import '../styles/global.css';
       const mainContent = document.getElementById('mainContent');
       const backToMenuBtn = document.getElementById('backToMenuBtn');
 
-      // Native Back Button Navigation Toggles Elegant Exit Transition (Left-to-Right)
+      // Native Back Button Toggles Slo-Mo Exit Transition Left-to-Right
       backToMenuBtn.onclick = () => {
         mainContent.classList.remove('mobile-view-active');
       };
@@ -413,47 +414,39 @@ import '../styles/global.css';
         }
       });
       
-      // Multi-Sentence Gold Urdu Explanations for Premium Domain Clarity
+      // Multi-Sentence Gold Urdu Explanations for Premium Clarity
       const views = {
         'navInbox': { 
           title: 'Public Messages', 
-          subEn: 'Review incoming public messages, feedback, and petitions sent directly from the constituency landing page to plan targeted local responses.',
-          subUr: 'عوامی پیغامات اور شکایات کا جائزہ لیں۔ یہاں سے ووٹرز کے مسائل کو سمجھ کر انتخابی حکمتِ عملی تیار کی جاتی ہے۔' 
+          subUr: 'عوامی پیغامات اور شکایات کا جائزہ لیں۔ یہاں سے حلقے کے ووٹرز کے حقیقی مسائل کو سمجھ کر انتخابی حکمتِ عملی تیار کی جاتی ہے اور عوامی رابطہ مہم کو منظم کیا جاتا ہے۔' 
         },
         'navConfirmed': { 
           title: 'Confirmed Voters', 
-          subEn: 'Log and track fully secured voter blocks, core community families, and verified party loyalty groups across local polling units.',
-          subUr: 'حتمی ووٹرز اور خاندانوں کا ریکارڈ درج کریں۔ اس ڈیٹا کی مدد سے پولنگ اسٹیشنز پر اپنی گرفت مضبوط بنائیں۔' 
+          subUr: 'حتمی ووٹرز اور خاندانوں کا مکمل ریکارڈ یہاں درج کریں۔ اس ڈیٹا بیس کی مدد سے ہر پولنگ اسٹیشن پر اپنی انتخابی گرفت کو مضبوط اور مربوط بنائیں۔' 
         },
         'navSwing': { 
           title: 'Swing Voters', 
-          subEn: 'Monitor high-priority uncommitted voter groups and identify tailored community demands or leverage points to swing local majorities.',
-          subUr: 'غیر فیصلہ کن ووٹرز اور ان کے مطالبات کا انتظام کریں۔ ان ووٹرز کی توجہ حاصل کر کے مہم کو کامیابی کی طرف موڑیں۔' 
+          subUr: 'غیر فیصلہ کن ووٹرز اور ان کے مطالبات کا انتظام کریں۔ ان ووٹرز کی مخصوص ضروریات کو پورا کر کے مہم کا رخ کامیابی کی طرف موڑنے کے لیے کام کریں۔' 
         },
         'navInternal': { 
           title: 'Focal Points', 
-          subEn: 'Issue, review, and track active internal directives and core operational tasks assigned to team managers across the constituency.',
-          subUr: 'انتخابی مہم کے مینیجرز اور فوکل پرسنز کے لیے اندرونی احکامات اور اہم ترین ہدایات جاری کریں۔' 
+          subUr: 'انتخابی مہم کے مینیجرز اور فیلڈ فوکل پرسنز کے لیے اہم ترین اندرونی ہدایات جاری کریں۔ یہاں سے ٹیموں کی کارکردگی اور ڈیوٹیز کی نگرانی کی جاتی ہے۔' 
         },
         'navOpp': { 
           title: 'Opp-Research', 
-          subEn: 'Maintain classified dossiers on counter-candidate platforms, tracking strategic vulnerabilities and mapping tactical response strategies.',
-          subUr: 'مخالف امیدواروں کی مہم اور ان کی خامیوں پر نظر رکھیں۔ انتخابی مہم کے دوران جوابی حکمتِ عملی کے لیے خفیہ معلومات درج کریں۔' 
+          subUr: 'مخالف امیدواروں کی مہم، بیانات اور خامیوں پر گہری نظر رکھیں۔ جوابی بیانات اور انتخابی جلسوں میں جوابی حکمتِ عملی کے لیے اہم ترین معلومات یہاں محفوظ کریں۔' 
         },
         'navNews': { 
           title: 'Important News', 
-          subEn: 'Review, draft, and authorize official press statements and updates before deploying them live to the public media stream.',
-          subUr: 'میڈیا اور عوام کے لیے مہم کی تازہ ترین خبریں اور بیانات منظور کریں۔ یہاں سے ہر خبر براہِ راست پبلک اسٹریم پر جائے گی۔' 
+          subUr: 'میڈیا اور پبلک پورٹل کے لیے مہم کی تازہ ترین خبریں اور بیانات منظور کریں۔ یہاں سے جاری کی جانے والی ہر خبر براہِ راست مرکزی ویب سائٹ پر اپڈیٹ ہوگی۔' 
         },
         'navGoals': { 
           title: 'Campaign Goals', 
-          subEn: 'Track institutional election campaign milestones, comparing raw real-time field data registrations against target volumetric metrics.',
-          subUr: 'انتخابی مہم کے بڑے اہداف اور ہدف شدہ ووٹرز کی تعداد کا موازنہ کریں۔ مہم کی روزمرہ کی پیشرفت کا جائزہ لیں۔' 
+          subUr: 'انتخابی مہم کے بڑے اہداف اور ہدف شدہ ووٹرز کی تعداد کا موازنہ کریں۔ روزانہ کی بنیاد پر فیلڈ ڈیٹا کا جائزہ لے کر مہم کی رفتار کو تیز کریں۔' 
         },
         'navPostal': { 
           title: 'Postal Ballots', 
-          subEn: 'Securely audit public department mail-in registration records, ensuring high-fidelity handling of government worker service ballots.',
-          subUr: 'سرکاری ملازمین اور محکموں کے پوسٹل بیلٹ کا درست ریکارڈ رکھیں۔ ہر ایک بیلٹ پیپر کی حفاظت اور گنتی کو یقینی بنائیں۔' 
+          subUr: 'سرکاری ملازمین اور محکموں کے پوسٹل بیلٹ کا درست ریکارڈ رکھیں۔ ہر ایک بیلٹ پیپر کی ترسیل اور گنتی کو شفاف بنانے کے لیے یہ سیکشن استعمال کریں۔' 
         }
       };
 
@@ -488,7 +481,6 @@ import '../styles/global.css';
         const s = views[activeNavId];
         s.el.classList.remove('hidden');
         document.getElementById('viewTitle').innerText = s.title;
-        document.getElementById('viewSubtitleEn').innerText = s.subEn;
         
         const urduHeaderEl = document.getElementById('viewSubtitleUr');
         if (s.subUr) {
@@ -511,7 +503,7 @@ import '../styles/global.css';
           actionBox.appendChild(btn);
         }
 
-        // Slide Over Smooth Entry Transition Framework Trigger (Right-to-Left)
+        // Slo-Mo Transform Sliding Panel Controller Trigger (Right-to-Left Entry)
         if (window.innerWidth < 768 && !isInitialLoad) {
             mainContent.classList.add('mobile-view-active');
         }
