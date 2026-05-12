@@ -377,7 +377,7 @@ import '../styles/global.css';
                       <input type="number" id="psCount" required placeholder="EXAMPLE TO USE: 145" class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-5 h-16 text-white w-full text-base placeholder-white/20 focus:border-[#BA8E23] outline-none">
                     </div>
                     <div class="sm:col-span-2">
-                      <label class="text-xs font-black text-[#BA8E23] uppercase tracking-wider block mb-2">Operational Tracking Log Notes</label>
+                      <label class="text-xs font Black text-[#BA8E23] uppercase tracking-wider block mb-2">Operational Tracking Log Notes</label>
                       <textarea id="psNotes" placeholder="EXAMPLE TO USE: Verified and cleanly recorded via official departmental focal persons. Logged and safely packed for secure dispatch to main station." class="bg-[#001A0B] border border-[#BA8E23]/50 rounded-xl px-5 py-4 text-white w-full text-base placeholder-white/20 focus:border-[#BA8E23] outline-none h-32 resize-none"></textarea>
                     </div>
                   </div>
@@ -399,11 +399,14 @@ import '../styles/global.css';
       const dashboardScreen = document.getElementById('dashboardScreen');
       const loginScreen = document.getElementById('loginScreen');
       
+      const adminEmail = document.getElementById('adminEmail');
+      const adminPassword = document.getElementById('adminPassword');
+      
       const sidebar = document.getElementById('adminSidebar');
       const mainContent = document.getElementById('mainContent');
       const backToMenuBtn = document.getElementById('backToMenuBtn');
 
-      // Native Back Button Toggles Slo-Mo Exit Transition Left-to-Right
+      // Native Back Button Navigation Toggles Slo-Mo Exit Transition Left-to-Right
       backToMenuBtn.onclick = () => {
         mainContent.classList.remove('mobile-view-active');
       };
@@ -588,6 +591,18 @@ import '../styles/global.css';
           if (error) alert("Error: " + error.message); else { alert("Ballots Logged!"); formPostal.reset(); document.getElementById('formPostal').classList.add('hidden'); }
         };
       }
+
+      // DISPLAY DATA CARDS
+      const dummyData = {
+        inbox: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('msg1')"><h4 class="truncate max-w-[200px] md:max-w-full font-semibold text-base">Gorikot Healthcare Petition</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">URGENT</span><span id="icon_msg1" class="text-white font-bold">+</span></div></div><div id="msg1" class="hq-card-body hidden font-urdu text-right text-lg leading-loose" dir="rtl">گوریکوٹ میں ادویات کی شدید کمی ہے، براہ کرم اس پر توجہ دیں۔</div></div>`,
+        confirmed: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('cv1')"><h4 class="font-semibold text-base">Rattoo Valley Bloc</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">1,250 Voters</span><span id="icon_cv1" class="text-white font-bold">+</span></div></div><div id="cv1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Solid support from the local union. Key contact: Haji Mustafa.</p></div></div>`,
+        swing: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('sv1')"><h4 class="font-semibold text-base">Bunji Youth Council</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">LEVERAGE: IT LAB</span><span id="icon_sv1" class="text-white font-bold">+</span></div></div><div id="sv1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Currently leaning towards opposition due to connectivity issues. Promising a fiber-optic node can flip 400 votes.</p></div></div>`,
+        internal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('ip1')"><h4 class="font-semibold text-base">Operation Door-to-Door</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-red-500 border-red-500">IMPACT: HIGH</span><span id="icon_ip1" class="text-white font-bold">+</span></div></div><div id="ip1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Targeting 50 households per day in Dashkin sector. Handlers must emphasize digital job creation.</p></div></div>`,
+        opp: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('intel1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold text-base">Opponent A - Vulnerability</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag">WEAPON: CONTRACTS</span><span id="icon_intel1" class="text-white font-bold">+</span></div></div><div id="intel1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Found discrepancies in public road contracts for 2023. Ready for release in Week 4.</p></div></div>`,
+        news: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('news1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold text-base">Major Fahad Promises IT Rev</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-green-400 border-green-400">APPROVED</span><span id="icon_news1" class="text-white font-bold">+</span></div></div><div id="news1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Scheduled for broadcast on local GB networks tonight at 8:00 PM.</p></div></div>`,
+        goals: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('goal1')"><h4 class="truncate max-w-[150px] md:max-w-full font-semibold text-base">Goal: 15,000 Verified Voters</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-blue-400 border-blue-400">62% DONE</span><span id="icon_goal1" class="text-white font-bold">+</span></div></div><div id="goal1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Target: 15k | Current: 9.3k. Strategy: Intensive focus on female voter registration in rural zones.</p></div></div>`,
+        postal: `<div class="hq-card"><div class="hq-card-header" onclick="toggleAccordion('post1')"><h4 class="font-semibold text-base">GB Education Dept</h4><div class="flex items-center gap-2 md:gap-4"><span class="status-tag text-white border-white">85 Ballots</span><span id="icon_post1" class="text-white font-bold">+</span></div></div><div id="post1" class="hq-card-body hidden"><p class="text-sm text-white/80 leading-relaxed">Secured through departmental focal person. Verified and logged for station dispatch.</p></div></div>`
+      };
 
       document.getElementById('inboxContainer').innerHTML = dummyData.inbox;
       document.getElementById('voterTableBody').innerHTML = dummyData.confirmed;
